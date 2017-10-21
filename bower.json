@@ -1,0 +1,17 @@
+{
+  "name": "Mean_Blog",
+  "homepage": "https://github.com/IvankoRambo/mean-blog",
+  "authors": [
+    "IvankoRambo"
+  ],
+  "description": "IvankoRambo_blog",
+  "main": "public/main.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "name": "meanblog",
+  "version": "0.0.0",
+  "description": "IvankoRambo_blog",
+  "main": "server.js",
+  "dependencies": {
+    "bower": "~1.8.2"
+  },
+  "devDependencies": {
+    "nodemon": "~1.12.1",
+    "express": "~4.16.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IvankoRambo/mean-blog.git"
+  },
+  "author": "IvankoRambo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/IvankoRambo/mean-blog/issues"
+  }
+}
