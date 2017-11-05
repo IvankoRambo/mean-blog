@@ -18,19 +18,21 @@ router
 			if(err || data == null){
 				res.status(404);
 				res.end();
+				return;
 			}
 			res.status(200);
 			res.json({posts: data, postsCount: data.length});
 		});
 	});
 	
-router.
-	use(function(req, res, next){
+router
+	.use(function(req, res, next){
 		if(!req.user){
 			req.user = {id: 1};
 		}
 		next();
 	})
+	.use(bodyParser.urlencoded({extended: false}))
 	.use(bodyParser.json())
 	.route('/post')
 	.post(function(req, res){
@@ -41,11 +43,48 @@ router.
 			if(err || newPost == null){
 				res.status(500);
 				res.json({success: false});
+				return;
 			}
 			
 			res.status(200);
 			res.json({success: true});
 		});
 	});
+	
+router
+	.use(bodyParser.urlencoded({extended: false}))
+	.use(bodyParser.json())
+	.param('id', function(req, res, next){
+		req.dbQuery = {'_id': req.params.id};
+		next();
+	})
+	.route('/posts/:id')
+	.get(function(req, res){
+		db.posts.findOne(req.dbQuery, function(err, post){
+			if(err || post == null){
+				res.status(404);
+				res.end();
+				return;
+			}
+			
+			res.status(200);
+			res.json({post: post});
+		});
+	})
+	.delete(function(req, res){
+		db.posts.remove(req.dbQuery, {}, function(err, removedAmount){
+			res.json({removed: removedAmount});
+		});
+	})
+	.put(function(req, res){
+		var updatedPost = req.body;
+		'$promise' in updatedPost && delete updatedPost.$promise;
+		'$resolved' in updatedPost && delete updatedPost.$resolved;
+		
+		db.posts.update(req.dbQuery, {$set: updatedPost}, {}, function(err, updatedAmount){
+			res.json({updated: updatedAmount});
+		});
+	});
+	
 	
 module.exports = router;
