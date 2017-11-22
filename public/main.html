@@ -2,17 +2,24 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>IvankoRambo blog</title>
+		<base href="/">
 		<link type="text/css" rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
 	</head>
 	<body>
 		<div class="container">
-			<div class="page-header">
-				Just testing the application {{initMessage}}
+			<div class="row">
+				Here is a main
+				<div class="col-sm-12" ng-view></div>
 			</div>
 		</div>
-		<script type="application/javascript" src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+		
 		<script type="application/javascript" src="lib/jquery/dist/jquery.min.js"></script>
+		<script type="application/javascript" src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
 		<script type="application/javascript" src="lib/angular/angular.min.js"></script>
+		<script type="application/javascript" src="lib/angular-route/angular-route.min.js"></script>
+		<script type="application/javascript" src="lib/angular-resource/angular-resource.min.js"></script>
 		<script type="application/javascript" src="src/app.js"></script>
+		<script type="application/javascript" src="src/controllers.js" ></script>
+		<script type="application/javascript" src="src/resources.js"></script>
 	</body>
 </html>
