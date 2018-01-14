@@ -14,7 +14,7 @@ db.posts = new Datastore({
 router
 	.route('/posts')
 	.get(function(req, res){
-		db.posts.find({}, function(err, data){
+		db.posts.find({}).sort({postDate: -1}).exec(function(err, data){
 			if(err || data == null){
 				res.status(404);
 				res.end();
@@ -37,7 +37,7 @@ router
 	.route('/post')
 	.post(function(req, res){
 		var post = req.body;
-		post.postDate = commonHelpers.getISODate();
+		post.postDate = new Date().getTime();
 		
 		db.posts.insert(post, function(err, newPost){
 			if(err || newPost == null){

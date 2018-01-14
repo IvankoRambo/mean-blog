@@ -1,3 +1,16 @@
-<div class="posts-view">
-	For now checking the posts view
-</div>
+<p>
+	<input type="search" class="form-control" ng-model="$postList.query">
+</p>
+<main id="main" class="posts-main">
+	<article ng-repeat="post in $postList.posts.posts" id="post-{{post._id}}" class="post post-{{post._id}} type-post format-standard">
+		<header class="entry-header">
+			<div ng-repeat="headerField in $postList.headerFields" ng-if="post[headerField]" class="entry-header_block">
+				<div class="entry-header_internal name {{headerField}}">{{headerField | labelCase}}</div>
+				<div ng-click="$postList.goToPost(post._id)" class="entry-header_internal value">{{post[headerField] | ISODate}}</div>
+			</div>
+		</header>
+		<div ng-repeat="bodyField in $postList.bodyFields" ng-if="post[bodyField]" class="entry-summary">
+			{{post[bodyField]}}
+		</div>
+	</article>
+</main>
