@@ -1,6 +1,8 @@
 angular.module('IvankoRambo')
-	.controller('PostsController', ['$routeParams', 'Posts', '$location', '$sce', 
-	                                function PostsController($rP, Posts, $l, $s){
+	.controller('PostsController', ['$routeParams', 'Posts', '$location', '$sce', '$rootScope', 
+	                                function PostsController($rP, Posts, $l, $s, $rS){
+		$rS.PAGE = 'posts';
+		
 		this.posts = Posts.query();
 		this.headerFields = ['postDate', 'title'];
 		this.bodyFields = ['text'];
@@ -18,9 +20,14 @@ angular.module('IvankoRambo')
 			}
 		}
 	}])
-	.controller('PostController', ['$routeParams', 'Posts', 
-	                               function PostController($rP, Posts){
+	.controller('PostController', ['$routeParams', 'Posts', '$rootScope', 
+	                               function PostController($rP, Posts, $rS){
+		$rS.PAGE = 'post';
+		
 		this.post = Posts.query({id: $rP.id});
 		this.headerFields = ['postDate', 'title'];
 		this.bodyFields = ['text'];
+	}])
+	.controller('AboutController', ['$rootScope', function($rS){
+		$rS.PAGE = 'about';
 	}]);

@@ -7,8 +7,10 @@
 	</head>
 	<body>
 		<div class="container">
-			<div class="row">
-				Here is a main
+			<div class="row site-nav-part">
+				<div class="nav" ng-include='"views/navigation.html"'></div>
+			</div>
+			<div class="row site-main-part">
 				<div class="col-sm-12" ng-view></div>
 			</div>
 		</div>

@@ -21,6 +21,7 @@ angular.module('IvankoRambo')
 	})
 	.filter('previewText', function(){
 		return function(text){
-			return text.replace(/(<(img[^>]+)>(\s)?)/ig, '').substring(0, 300);
+			var formattedText = text.replace(/(<(img[^>]+)>(\s)?)/ig, '');
+			return formattedText.length > 300 ? formattedText.substring(0, 300) + '...' : formattedText;
 		}
 	});
