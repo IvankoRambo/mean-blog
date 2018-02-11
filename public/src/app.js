@@ -16,6 +16,11 @@ angular.module('IvankoRambo', ['ngRoute', 'ngResource', 'ngSanitize'])
 				templateUrl: 'views/about.html',
 				controllerAs: '$about'
 			})
+			.when('/login', {
+				controller: 'LoginController',
+				templateUrl: 'views/login.html',
+				controllerAs: '$login'
+			})
 			.otherwise({
 				redirectTo: '/posts'
 			});

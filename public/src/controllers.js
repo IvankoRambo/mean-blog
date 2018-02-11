@@ -30,4 +30,16 @@ angular.module('IvankoRambo')
 	}])
 	.controller('AboutController', ['$rootScope', function($rS){
 		$rS.PAGE = 'about';
+	}])
+	.controller('LoginController', ['$rootScope', 'Users',
+	                                function($rS, Users){
+		$rS.PAGE = 'login';
+		
+		var self = this;
+		this.formData = {};
+		this.submitForm = function submitForm(form, evt){
+			evt.preventDefault();
+			var postData = 'username=' + self.formData.username + '&password=' + self.formData.password;
+			Users.set(postData);
+		}
 	}]);
