@@ -1,5 +1,6 @@
 angular.module('IvankoRambo')
-	.controller('PostsController', ['$routeParams', 'Posts', '$location', function PostsController($rP, Posts, $l){
+	.controller('PostsController', ['$routeParams', 'Posts', '$location', '$sce', 
+	                                function PostsController($rP, Posts, $l, $s){
 		this.posts = Posts.query();
 		this.headerFields = ['postDate', 'title'];
 		this.bodyFields = ['text'];

@@ -18,4 +18,9 @@ angular.module('IvankoRambo')
 			text = text.replace(/([A-Z])/g, ' $1');
 			return text[0].toUpperCase() + text.slice(1);
 		}
+	})
+	.filter('previewText', function(){
+		return function(text){
+			return text.replace(/(<(img[^>]+)>(\s)?)/ig, '').substring(0, 300);
+		}
 	});

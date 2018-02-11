@@ -1,6 +1,3 @@
-<p>
-	<input type="search" class="form-control" ng-model="$postList.query">
-</p>
 <main id="main" class="posts-main">
 	<article ng-repeat="post in $postList.posts.posts" id="post-{{post._id}}" class="post post-{{post._id}} type-post format-standard">
 		<header class="entry-header">
@@ -10,7 +7,7 @@
 			</div>
 		</header>
 		<div ng-repeat="bodyField in $postList.bodyFields" ng-if="post[bodyField]" class="entry-summary">
-			{{post[bodyField]}}
+			<html-markup origin-text="{{post[bodyField] | previewText}}"></html-markup>
 		</div>
 	</article>
 </main>

@@ -1,4 +1,4 @@
-angular.module('IvankoRambo', ['ngRoute', 'ngResource'])
+angular.module('IvankoRambo', ['ngRoute', 'ngResource', 'ngSanitize'])
 	.config(function($routeProvider, $locationProvider, $resourceProvider){
 		$routeProvider
 			.when('/posts', {
