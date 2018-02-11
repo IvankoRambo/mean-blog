@@ -5,6 +5,14 @@ angular.module('IvankoRambo', ['ngRoute', 'ngResource', 'ngSanitize'])
 				controller: 'PostsController',
 				templateUrl: 'views/posts.html',
 				controllerAs: '$postList'
+			})
+			.when('/posts/:id', {
+				controller: 'PostController',
+				templateUrl: 'views/post.html',
+				controllerAs: '$post'
+			})
+			.otherwise({
+				redirectTo: '/posts'
 			});
 		
 		$locationProvider.html5Mode(true);

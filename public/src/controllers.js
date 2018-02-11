@@ -17,4 +17,10 @@ angular.module('IvankoRambo')
 				$l.url('/posts/' + id);
 			}
 		}
+	}])
+	.controller('PostController', ['$routeParams', 'Posts', 
+	                               function PostController($rP, Posts){
+		this.post = Posts.query({id: $rP.id});
+		this.headerFields = ['postDate', 'title'];
+		this.bodyFields = ['text'];
 	}]);

@@ -1,0 +1,11 @@
+<main id="main" class="post-main">
+	<header class="entity-header">
+		<div ng-repeat="headerField in $post.headerFields" ng-if="$post.post.post[headerField]" class="entry-header_block">
+			<div class="entry-header_internal name {{headerField}}">{{headerField | labelCase}}</div>
+			<div class="entry-header_internal value">{{$post.post.post[headerField] | ISODate}}</div>
+		</div>
+	</header>
+	<div ng-repeat="bodyField in $post.bodyFields" ng-if="$post.post.post[bodyField]" id="container" class="site-content container">
+		<html-markup origin-text="{{$post.post.post[bodyField]}}"></html-markup>
+	</div>
+</main>
