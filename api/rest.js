@@ -26,12 +26,6 @@ router
 	});
 	
 router
-	.use(function(req, res, next){
-		if(!req.user){
-			req.user = {id: 1};
-		}
-		next();
-	})
 	.use(bodyParser.urlencoded({extended: false}))
 	.use(bodyParser.json())
 	.route('/post')
