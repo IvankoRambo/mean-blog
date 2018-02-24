@@ -26,8 +26,7 @@ router
 		};
 		db.users.findOne(userObj, function(err, user){
 			if(user == null){
-				res.status(404);
-				console.log({'success': false, 'message': 'Incorrect credentials'});
+				res.status(401);
 				res.json({'success': false, 'message': 'Incorrect credentials'});
 			}
 			else{
@@ -38,15 +37,18 @@ router
 		});
 	})
 	.get('/logout', function(req, res){
-		req.session.userId = null;
+		if(req.session.userId){
+			req.session.userId = null;
+		}
+		res.status(200);
 		res.end();
 	})
-	.get('login_status', function(req, res){
+	.get('/loginstatus', function(req, res){
 		if(req.session.userId){
 			var userObj = { '_id': req.session.userId };
 			db.users.findOne(userObj, function(err, user){
 				if(user == null){
-					res.status(404);
+					res.status(401);
 					res.json({'status': false, 'userinfo': null});
 				}
 				else{

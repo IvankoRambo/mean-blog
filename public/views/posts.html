@@ -1,4 +1,5 @@
 <main id="main" class="posts-main">
+	<div class="loggedin-status" ng-show="$postList.loggedIn">You logged in as: {{$postList.username}}</div>
 	<article ng-repeat="post in $postList.posts.posts" id="post-{{post._id}}" class="post post-{{post._id}} type-post format-standard">
 		<header class="entry-header">
 			<div ng-repeat="headerField in $postList.headerFields" ng-if="post[headerField]" class="entry-header_block">

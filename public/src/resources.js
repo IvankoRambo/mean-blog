@@ -7,7 +7,7 @@ angular.module('IvankoRambo')
 	})
 	.factory('Users', function($http){
 		var postUrl = '/api/login',
-			getUrl = '/api/login_status';
+			getUrl = '/api/loginstatus';
 		
 		return {
 			get: function(){

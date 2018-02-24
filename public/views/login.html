@@ -1,5 +1,6 @@
-<form name="loginForm" ng-submit="loginForm.$valid && $login.submitForm(loginForm, $event)" action="#">
+<form name="loginForm" ng-submit="loginForm.$valid && $login.submitForm(loginForm, $event)" class="b-form" action="#">
 	Username: <br><input type="text" name="username" ng-required="true" ng-model="$login.formData.username"><br><br>
 	Password: <br><input type="password" name="password" ng-required="true" ng-model="$login.formData.password"><br><br>
 	<input type="submit" value="Login">
+	<div class="b-form-error" ng-show="!$login.success && $login.errorMessage">{{$login.errorMessage}}</div>
 </form>
