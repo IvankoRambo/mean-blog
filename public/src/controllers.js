@@ -24,16 +24,58 @@ angular.module('IvankoRambo')
 			}
 		}
 	}])
-	.controller('PostController', ['$routeParams', 'Posts', 'Users', '$rootScope', 
-	                               function PostController($rP, Posts, Users, $rS){
+	.controller('PostController', ['$routeParams', 'Posts', 'Users', '$rootScope', '$location', 
+	                               function PostController($rP, Posts, Users, $rS, $l){
 		$rS.PAGE = 'post';
+		
+		var self = this;
 		
 		this.post = Posts.query({id: $rP.id});
 		this.headerFields = ['postDate', 'title'];
 		this.bodyFields = ['text'];
 		this.loggedIn = false;
+		this.contenteditable = false;
+		this.colors = $rS.colors;
 		
 		checkUserStatus.call(this, Users);
+		
+		this.deletePost = function(evt){
+			evt.preventDefault();
+			Posts.remove({id: $rP.id}).$promise.then(function(data){
+				if(data.removed){
+					$l.url('/posts');
+				}
+			});
+		}
+		
+		this.changeEdit = function(evt){
+			evt.preventDefault();
+			self.contenteditable = !self.contenteditable;
+		}
+		
+		this.updatePost = function(evt){
+			evt.preventDefault();
+			var title = document.querySelector('.value-title'),
+				text = document.querySelector('.html-content'),
+				updateData;
+			
+			if(title && text){
+				updateData = {
+					title: title.textContent,
+					text: text.innerHTML
+				};
+				
+				Posts.update({id: $rP.id}, updateData).$promise.then(function(data){
+					self.updateMessage = data.updated ? "Was updated!" : "Was\'nt updated";
+				}, function(data){
+					self.updateMessage = "Some troubles with request occured";
+				});
+			}
+			else{
+				self.updateMessage = "The needed post elements are not presented on a page";
+			}
+		}
+		
 	}])
 	.controller('AboutController', ['$rootScope', function($rS){
 		$rS.PAGE = 'about';

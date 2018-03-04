@@ -27,4 +27,7 @@ angular.module('IvankoRambo', ['ngRoute', 'ngResource', 'ngSanitize'])
 		
 		$locationProvider.html5Mode(true);
 		$resourceProvider.defaults.stripTrailingSlashes = false;
+	})
+	.run(function($rootScope){
+		$rootScope.colors = JSON.stringify(['000000', 'FF9966', '6699FF', '99FF66', 'CC0000', '00CC00', '0000CC', '333333', '0066FF', 'FFFFFF']);
 	});

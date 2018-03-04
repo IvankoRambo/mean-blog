@@ -3,10 +3,20 @@
 	<header class="entity-header">
 		<div ng-repeat="headerField in $post.headerFields" ng-if="$post.post.post[headerField]" class="entry-header_block">
 			<div class="entry-header_internal name {{headerField}}">{{headerField | labelCase}}</div>
-			<div class="entry-header_internal value">{{$post.post.post[headerField] | ISODate}}</div>
+			<div class="entry-header_internal value value-{{headerField}}">{{$post.post.post[headerField] | ISODate}}</div>
 		</div>
 	</header>
-	<div ng-repeat="bodyField in $post.bodyFields" ng-if="$post.post.post[bodyField]" id="container" class="site-content container">
-		<html-markup origin-text="{{$post.post.post[bodyField]}}"></html-markup>
+	<div class="post-toolbar_wrapper">
+		<edit-toolbar colors="{{$post.colors}}" ></edit-toolbar>
 	</div>
+	<div ng-repeat="bodyField in $post.bodyFields" ng-if="$post.post.post[bodyField]" id="container" class="site-content container">
+		<html-markup contenteditable="{{$post.contenteditable}}" origin-text="{{$post.post.post[bodyField]}}"></html-markup>
+	</div>
+	<div class="post-controlls" ng-show="$post.loggedIn">
+		<input type="button" name="delete" ng-click="$post.deletePost($event)" value="Delete" />
+		<input type="button" name="edit" ng-show="!$post.contenteditable" ng-click="$post.changeEdit($event)" value="Edit" />
+		<input type="button" name="update" ng-show="$post.contenteditable" ng-click="$post.updatePost($event)" value="Update" />
+		<input type="button" name="cancel" ng-show="$post.contenteditable" ng-click="$post.changeEdit($event)" value="Cancel" />
+	</div>
+	<div class="post-status--update" ng-show="$post.updateMessage">{{$post.updateMessage}}</div>
 </main>

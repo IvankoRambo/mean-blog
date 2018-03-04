@@ -67,6 +67,10 @@ router
 	})
 	.delete(function(req, res){
 		db.posts.remove(req.dbQuery, {}, function(err, removedAmount){
+			if(err){
+				res.json({removed: 0});
+			}
+			
 			res.json({removed: removedAmount});
 		});
 	})
@@ -76,6 +80,10 @@ router
 		'$resolved' in updatedPost && delete updatedPost.$resolved;
 		
 		db.posts.update(req.dbQuery, {$set: updatedPost}, {}, function(err, updatedAmount){
+			if(err){
+				res.json({updated: 0});
+			}
+			
 			res.json({updated: updatedAmount});
 		});
 	});

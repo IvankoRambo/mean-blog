@@ -1,0 +1,82 @@
+<div class="commands" id="commands">
+	<a href="#" data-command='undo' ng-click="$ctrl.doCommand($event)" >
+		Undo
+	</a>
+	<a href="#" data-command='redo' ng-click="$ctrl.doCommand($event)" >
+		Redo
+	</a>
+	<div class="command-letter-color_wrapper">
+		<i class="fa fa-font"></i>
+		<div class="command-letter-color_pallette">
+			<a data-command='forecolor' data-value='#{{color}}' style="background-color: {{color}};" class="command-letter-color_item" >
+				{{color}}
+			</a>
+		</div>
+	</div>
+	<div class="command-background-color_wrapper">
+		<i class="fa fa-font"></i>
+		<div class="command-background-color_pallette">
+			
+		</div>
+	</div>
+	<a href="#" data-command='bold' ng-click="$ctrl.doCommand($event)" >
+		Bold
+	</a>
+	<a href="#" data-command='italic' ng-click="$ctrl.doCommand($event)" >
+		Italic
+	</a>
+	<a href="#" data-command='underline' ng-click="$ctrl.doCommand($event)" >
+		Underline
+	</a>
+	<a href="#" data-command='strikeThrough' ng-click="$ctrl.doCommand($event)" >
+		Strikethrough
+	</a>
+	<a href="#" data-command='justifyLeft' ng-click="$ctrl.doCommand($event)" >
+		Justifyleft
+	</a>
+	<a href="#" data-command='justifyCenter' ng-click="$ctrl.doCommand($event)" >
+		Justifycenter
+	</a>
+	<a href="#" data-command='justifyRight' ng-click="$ctrl.doCommand($event)" >
+		Justifyright
+	</a>
+	<a href="#" data-command='justifyFull' ng-click="$ctrl.doCommand($event)" >
+		Justifyfull
+	</a>
+	<a href="#" data-command='indent' ng-click="$ctrl.doCommand($event)" >
+		Indent
+	</a>
+	<a href="#" data-command='outdent' ng-click="$ctrl.doCommand($event)" >
+		Outdent
+	</a>
+	<a href="#" data-command='insertUnorderedList' ng-click="$ctrl.doCommand($event)" >
+		Ulist
+	</a>
+	<a href="#" data-command='insertOrderedList' ng-click="$ctrl.doCommand($event)" >
+		Olist
+	</a>
+	<a href="#" data-command='h1' ng-click="$ctrl.doCommand($event)" >
+		H1
+	</a>
+	<a href="#" data-command='h2' ng-click="$ctrl.doCommand($event)" >
+		H2
+	</a>
+	<a href="#" data-command='createlink' ng-click="$ctrl.doCommand($event)" >
+		Link
+	</a>
+	<a href="#" data-command='unlink' ng-click="$ctrl.doCommand($event)" >
+		Unlink
+	</a>
+	<a href="#" data-command='insertimage' ng-click="$ctrl.doCommand($event)" >
+		Img
+	</a>
+	<a href="#" data-command='p' ng-click="$ctrl.doCommand($event)" >
+		P
+	</a>
+	<a href="#" data-command='subscript' ng-click="$ctrl.doCommand($event)" >
+		Subscribt
+	</a>
+	<a href="#" data-command='superscript' ng-click="$ctrl.doCommand($event)" >
+		Superscript
+	</a>
+</div>
