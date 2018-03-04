@@ -6,11 +6,11 @@
 			<div class="entry-header_internal value value-{{headerField}}">{{$post.post.post[headerField] | ISODate}}</div>
 		</div>
 	</header>
-	<div class="post-toolbar_wrapper">
-		<edit-toolbar colors="{{$post.colors}}" ></edit-toolbar>
+	<div ng-show="$post.contenteditable" class="post-toolbar_wrapper">
+		<edit-toolbar colors="$post.colors" ></edit-toolbar>
 	</div>
 	<div ng-repeat="bodyField in $post.bodyFields" ng-if="$post.post.post[bodyField]" id="container" class="site-content container">
-		<html-markup contenteditable="{{$post.contenteditable}}" origin-text="{{$post.post.post[bodyField]}}"></html-markup>
+		<html-markup contenteditable-attribute="{{$post.contenteditable}}" origin-text="{{$post.post.post[bodyField]}}"></html-markup>
 	</div>
 	<div class="post-controlls" ng-show="$post.loggedIn">
 		<input type="button" name="delete" ng-click="$post.deletePost($event)" value="Delete" />
