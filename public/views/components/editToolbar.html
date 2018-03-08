@@ -8,7 +8,7 @@
 	<div class="command-letter-color_wrapper">
 		<i class="fa fa-font"></i>
 		<div class="command-letter-color_pallette">
-			<a ng-repeat="color in $ctrl.colors" ng-click="$ctrl.doCommand($event)" data-command='forecolor' data-value='#{{color}}' style="background-color: {{color}};" class="command-letter-color_item" >
+			<a href="#" ng-repeat="color in $ctrl.colors" ng-click="$ctrl.doCommand($event)" data-command='forecolor' data-value='#{{color}}' style="background-color: #{{color}};" class="command-letter-color_item" >
 				Fore {{color}}
 			</a>
 		</div>
@@ -16,7 +16,7 @@
 	<div class="command-background-color_wrapper">
 		<i class="fa fa-font"></i>
 		<div class="command-background-color_pallette">
-			<a ng-repeat="color in $ctrl.colors" ng-click="$ctrl.doCommand($event)" data-command='backcolor' data-value='#{{color}}' style="background-color: {{color}};" class="command-background-color_item" >
+			<a href="#" ng-repeat="color in $ctrl.colors" ng-click="$ctrl.doCommand($event)" data-command='backcolor' data-value='#{{color}}' style="background-color: #{{color}};" class="command-background-color_item" >
 				Background {{color}}
 			</a>
 		</div>

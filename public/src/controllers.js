@@ -1,6 +1,6 @@
 angular.module('IvankoRambo')
-	.controller('PostsController', ['$routeParams', 'Posts', 'Users', '$location', '$sce', '$rootScope', 
-	                                function PostsController($rP, Posts, Users, $l, $s, $rS){
+	.controller('PostsController', ['$routeParams', 'Posts', 'Users', '$location', '$rootScope', 
+	                                function PostsController($rP, Posts, Users, $l, $rS){
 		$rS.PAGE = 'posts';
 		
 		this.posts = Posts.query();
@@ -76,6 +76,43 @@ angular.module('IvankoRambo')
 			}
 		}
 		
+	}])
+	.controller('NewPost', ['Posts', 'Users', '$rootScope', '$location', 
+	                        function NewPost(Posts, Users, $rS, $l){
+		var self = this;
+		
+		this.loggedIn = false;
+		this.colors = $rS.colors;
+		this.titleText = '';
+		this.errorMessage = false;
+		
+		checkUserStatus.call(this, Users);
+		
+		this.savePost = function(evt){
+			evt.preventDefault();
+			var text = document.querySelector('.html-content'),
+				saveData;
+			
+			if(text){
+				saveData = {
+					title: self.titleText,
+					text: text.innerHTML
+				};
+				
+				Posts.save({}, saveData).$promise.then(function(data){
+					
+					if(data.success){
+						$l.url('/posts/' + data.postID);
+					}
+					else{
+						self.errorMessage = 'Some error occured during saving. Check db.';
+					}
+					
+				}, function(){
+					self.errorMessage = 'Some error occured during saving. Check db';
+				});
+			}
+		}
 	}])
 	.controller('AboutController', ['$rootScope', function($rS){
 		$rS.PAGE = 'about';

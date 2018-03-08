@@ -24,4 +24,9 @@ angular.module('IvankoRambo')
 			var formattedText = text.replace(/(<(img[^>]+)>(\s)?)/ig, '');
 			return formattedText.length > 300 ? formattedText.substring(0, 300) + '...' : formattedText;
 		}
+	})
+	.filter('trustHTML', function($sce){
+		return function(text){
+			return $sce.trustAsHtml(text);
+		};
 	});

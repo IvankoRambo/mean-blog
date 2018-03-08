@@ -28,21 +28,28 @@ router
 router
 	.use(bodyParser.urlencoded({extended: false}))
 	.use(bodyParser.json())
-	.route('/post')
+	.route('/posts')
 	.post(function(req, res){
 		var post = req.body;
 		post.postDate = new Date().getTime();
 		
-		db.posts.insert(post, function(err, newPost){
-			if(err || newPost == null){
-				res.status(500);
-				res.json({success: false});
-				return;
-			}
-			
-			res.status(200);
-			res.json({success: true});
-		});
+		if(req.session.userId){
+			db.posts.insert(post, function(err, newPost){
+				if(err || newPost == null){
+					res.status(500);
+					res.json({success: false});
+					return;
+				}
+				
+				var postID = newPost._id;
+				res.status(200);
+				res.json({success: true, postID: newPost._id});
+			});
+		}
+		else{
+			res.status(401);
+			res.json({success: false});
+		}
 	});
 	
 router
@@ -66,26 +73,38 @@ router
 		});
 	})
 	.delete(function(req, res){
-		db.posts.remove(req.dbQuery, {}, function(err, removedAmount){
-			if(err){
-				res.json({removed: 0});
-			}
-			
-			res.json({removed: removedAmount});
-		});
+		if(req.session.userId){
+			db.posts.remove(req.dbQuery, {}, function(err, removedAmount){
+				if(err){
+					res.json({removed: 0});
+				}
+				
+				res.json({removed: removedAmount});
+			});
+		}
+		else{
+			res.status(401);
+			res.json({success: false});
+		}
 	})
 	.put(function(req, res){
 		var updatedPost = req.body;
 		'$promise' in updatedPost && delete updatedPost.$promise;
 		'$resolved' in updatedPost && delete updatedPost.$resolved;
 		
-		db.posts.update(req.dbQuery, {$set: updatedPost}, {}, function(err, updatedAmount){
-			if(err){
-				res.json({updated: 0});
-			}
-			
-			res.json({updated: updatedAmount});
-		});
+		if(req.session.userId){
+			db.posts.update(req.dbQuery, {$set: updatedPost}, {}, function(err, updatedAmount){
+				if(err){
+					res.json({updated: 0});
+				}
+				
+				res.json({updated: updatedAmount});
+			});
+		}
+		else{
+			res.status(401);
+			res.json({success: false});
+		}
 	});
 	
 	
