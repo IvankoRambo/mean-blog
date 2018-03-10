@@ -1,7 +1,7 @@
 angular.module('IvankoRambo')
 	.factory('Posts', function($resource){
 		return $resource('/api/posts/:id', {id: '@id'}, {
-			'query': {method: 'GET', isArray: false},
+			'query': {method: 'GET', isArray: false, params: {limit: '5'}},
 			'update': { method: 'PUT' }
 		});
 	})

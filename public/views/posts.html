@@ -10,5 +10,6 @@
 		<div ng-repeat="bodyField in $postList.bodyFields" ng-if="post[bodyField]" class="entry-summary">
 			<html-markup origin-text="{{post[bodyField] | previewText}}"></html-markup>
 		</div>
+		<div class="post-pagination" ng-hide="true">{{$last && $postList.paginatedPostsInvoker()}}</div>
 	</article>
 </main>

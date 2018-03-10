@@ -1,9 +1,14 @@
 angular.module('IvankoRambo')
 	.controller('PostsController', ['$routeParams', 'Posts', 'Users', '$location', '$rootScope', 
 	                                function PostsController($rP, Posts, Users, $l, $rS){
-		$rS.PAGE = 'posts';
+		var self = this;
 		
-		this.posts = Posts.query();
+		$rS.PAGE = 'posts';
+		this.limit = 5;
+		this.step = 5;
+		this.endOfDocument = false;
+		
+		getPaginatedPosts.call(this, Posts);
 		this.headerFields = ['postDate', 'title'];
 		this.bodyFields = ['text'];
 		
@@ -21,6 +26,12 @@ angular.module('IvankoRambo')
 		this.goToPost = function(id){
 			if(id != null){
 				$l.url('/posts/' + id);
+			}
+		}
+		
+		this.paginatedPostsInvoker = function(){
+			if(!self.endOfDocument){
+				getPaginatedPosts.call(self, Posts);
 			}
 		}
 	}])
@@ -144,6 +155,35 @@ angular.module('IvankoRambo')
 				});
 		}
 	}]);
+
+function getPaginatedPosts(PostsResource, limit){
+	limit = limit || this.limit;
+	var postBlocks = document.querySelectorAll('article'),
+		viewPortTop = document.body.scrollTop,
+		viewPortBottom = viewPortTop + window.innerHeight,
+		lastPostBlock,
+		postTop,
+		postBottom;
+	if(postBlocks && postBlocks.length){
+		lastPostBlock = postBlocks[postBlocks.length - 1];
+		postTop = lastPostBlock.offsetTop;
+		postBottom = postTop + ( parseInt(document.defaultView.getComputedStyle(lastPostBlock, '').getPropertyValue('height')) + 
+				parseInt(document.defaultView.getComputedStyle(lastPostBlock, '').getPropertyValue('margin-top')) + 
+				parseInt(document.defaultView.getComputedStyle(lastPostBlock, '').getPropertyValue('margin-bottom')) +
+				parseInt(document.defaultView.getComputedStyle(lastPostBlock, '').getPropertyValue('padding-top')) + 
+				parseInt(document.defaultView.getComputedStyle(lastPostBlock, '').getPropertyValue('padding-bottom')) );
+	}
+	
+	if(limit === this.step || (lastPostBlock && postBottom < viewPortBottom)){
+		var self = this;
+		this.posts = PostsResource.query({limit: limit}, function(response){
+			self.endOfDocument = response.postsCount < self.limit;
+			if(!self.endOfDocument){
+				self.limit += self.step;
+			}
+		});
+	}
+}
 
 function checkUserStatus(UsersResource){
 	var self = this;

@@ -14,7 +14,9 @@ db.posts = new Datastore({
 router
 	.route('/posts')
 	.get(function(req, res){
-		db.posts.find({}).sort({postDate: -1}).exec(function(err, data){
+		var limitParam = parseInt(req.query.limit) || 0;
+		
+		db.posts.find({}).sort({postDate: -1}).limit(limitParam).exec(function(err, data){
 			if(err || data == null){
 				res.status(404);
 				res.end();
