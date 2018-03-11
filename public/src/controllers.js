@@ -6,6 +6,7 @@ angular.module('IvankoRambo')
 		$rS.PAGE = 'posts';
 		this.limit = 5;
 		this.step = 5;
+		this.endOfStaticLoad = false;
 		this.endOfDocument = false;
 		
 		getPaginatedPosts.call(this, Posts);
@@ -30,9 +31,19 @@ angular.module('IvankoRambo')
 		}
 		
 		this.paginatedPostsInvoker = function(){
-			if(!self.endOfDocument){
+			if(!self.endOfStaticLoad && !self.endOfDocument){
 				getPaginatedPosts.call(self, Posts);
 			}
+		}
+		
+		this.paginateOnScroll = function(eventName){
+			self.limit += self.step;
+			self.posts = Posts.query({limit: self.limit}, function(response){
+				self.endOfDocument = response.postsCount < self.limit;
+				if(self.endOfDocument){
+					angular.element(window).off(eventName);
+				}
+			});
 		}
 	}])
 	.controller('PostController', ['$routeParams', 'Posts', 'Users', '$rootScope', '$location', 
@@ -182,6 +193,9 @@ function getPaginatedPosts(PostsResource, limit){
 				self.limit += self.step;
 			}
 		});
+	}
+	else{
+		this.endOfStaticLoad = true;
 	}
 }
 

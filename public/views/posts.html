@@ -1,4 +1,4 @@
-<main id="main" class="posts-main">
+<main id="main" class="posts-main" posts-scroll >
 	<div class="loggedin-status" ng-show="$postList.loggedIn">You logged in as: {{$postList.username}}</div>
 	<article ng-repeat="post in $postList.posts.posts" id="post-{{post._id}}" class="post post-{{post._id}} type-post format-standard">
 		<header class="entry-header">
