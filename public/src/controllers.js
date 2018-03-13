@@ -1,15 +1,17 @@
 angular.module('IvankoRambo')
-	.controller('PostsController', ['$routeParams', 'Posts', 'Users', '$location', '$rootScope', 
-	                                function PostsController($rP, Posts, Users, $l, $rS){
+	.controller('PostsController', ['$routeParams', 'Posts', 'Users', '$location', '$rootScope', '$timeout', 
+	                                function PostsController($rP, Posts, Users, $l, $rS, $time){
 		var self = this;
 		
 		$rS.PAGE = 'posts';
 		this.limit = 5;
-		this.step = 5;
+		this.step = 0;
+		this.checkSum = 5;
 		this.endOfStaticLoad = false;
 		this.endOfDocument = false;
+		this.posts = [];
 		
-		getPaginatedPosts.call(this, Posts);
+		getPaginatedPosts.call(this, Posts, $time);
 		this.headerFields = ['postDate', 'title'];
 		this.bodyFields = ['text'];
 		
@@ -30,16 +32,12 @@ angular.module('IvankoRambo')
 			}
 		}
 		
-		this.paginatedPostsInvoker = function(){
-			if(!self.endOfStaticLoad && !self.endOfDocument){
-				getPaginatedPosts.call(self, Posts);
-			}
-		}
-		
 		this.paginateOnScroll = function(eventName){
-			self.limit += self.step;
-			self.posts = Posts.query({limit: self.limit}, function(response){
+			self.step += self.limit;
+			var postBack = Posts.query({step: self.step, limit: self.limit});
+			postBack.$promise.then(function(response){
 				self.endOfDocument = response.postsCount < self.limit;
+				self.posts = self.posts.concat(response.posts);
 				if(self.endOfDocument){
 					angular.element(window).off(eventName);
 				}
@@ -167,8 +165,8 @@ angular.module('IvankoRambo')
 		}
 	}]);
 
-function getPaginatedPosts(PostsResource, limit){
-	limit = limit || this.limit;
+function getPaginatedPosts(PostsResource, timeout, step){
+	step = step || this.step;
 	var postBlocks = document.querySelectorAll('article'),
 		viewPortTop = document.body.scrollTop,
 		viewPortBottom = viewPortTop + window.innerHeight,
@@ -185,17 +183,20 @@ function getPaginatedPosts(PostsResource, limit){
 				parseInt(document.defaultView.getComputedStyle(lastPostBlock, '').getPropertyValue('padding-bottom')) );
 	}
 	
-	if(limit === this.step || (lastPostBlock && postBottom < viewPortBottom)){
+	if(step === 0 || (lastPostBlock && postBottom < viewPortBottom)){
 		var self = this;
-		this.posts = PostsResource.query({limit: limit}, function(response){
+		var postBack = PostsResource.query({limit: self.limit, step: step});
+			
+		postBack.$promise.then(function(response){
 			self.endOfDocument = response.postsCount < self.limit;
-			if(!self.endOfDocument){
-				self.limit += self.step;
+			if(!self.endOfDocument && response.postsCount){
+				self.posts = self.posts.concat(response.posts);
+				self.step += self.limit;
+				timeout(function(){
+					getPaginatedPosts.call(self, PostsResource, timeout);
+				});
 			}
 		});
-	}
-	else{
-		this.endOfStaticLoad = true;
 	}
 }
 

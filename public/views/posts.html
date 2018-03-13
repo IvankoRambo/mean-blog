@@ -1,6 +1,6 @@
 <main id="main" class="posts-main" posts-scroll >
 	<div class="loggedin-status" ng-show="$postList.loggedIn">You logged in as: {{$postList.username}}</div>
-	<article ng-repeat="post in $postList.posts.posts" id="post-{{post._id}}" class="post post-{{post._id}} type-post format-standard">
+	<article ng-repeat="post in $postList.posts" id="post-{{post._id}}" class="post post-{{post._id}} type-post format-standard">
 		<header class="entry-header">
 			<div ng-repeat="headerField in $postList.headerFields" ng-if="post[headerField]" class="entry-header_block">
 				<div class="entry-header_internal name {{headerField}}">{{headerField | labelCase}}</div>
@@ -10,6 +10,5 @@
 		<div ng-repeat="bodyField in $postList.bodyFields" ng-if="post[bodyField]" class="entry-summary">
 			<html-markup origin-text="{{post[bodyField] | previewText}}"></html-markup>
 		</div>
-		<div class="post-pagination" ng-hide="true">{{$last && $postList.paginatedPostsInvoker()}}</div>
 	</article>
 </main>
