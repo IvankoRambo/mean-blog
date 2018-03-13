@@ -7,7 +7,6 @@ angular.module('IvankoRambo')
 		this.limit = 5;
 		this.step = 0;
 		this.checkSum = 5;
-		this.endOfStaticLoad = false;
 		this.endOfDocument = false;
 		this.posts = [];
 		
