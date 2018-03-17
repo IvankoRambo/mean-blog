@@ -2,4 +2,7 @@
 node_modules
 public/lib
 db
+public/static/sasstarget
+public/static/images
+.sass-cache
 .metadata

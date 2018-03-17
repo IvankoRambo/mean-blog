@@ -1,61 +1,59 @@
 <div class="commands" id="commands">
 	<a href="#" data-command='undo' ng-click="$ctrl.doCommand($event)" >
-		Undo
+		<i class="fa fa-undo"></i>
 	</a>
 	<a href="#" data-command='redo' ng-click="$ctrl.doCommand($event)" >
-		Redo
+		<i class="fa fa-repeat"></i>
 	</a>
-	<div class="command-letter-color_wrapper">
+	<div class="commands-letter-color_wrapper">
 		<i class="fa fa-font"></i>
-		<div class="command-letter-color_pallette">
+		<div class="commands-letter-color_pallette">
 			<a href="#" ng-repeat="color in $ctrl.colors" ng-click="$ctrl.doCommand($event)" data-command='forecolor' data-value='#{{color}}' style="background-color: #{{color}};" class="command-letter-color_item" >
-				Fore {{color}}
 			</a>
 		</div>
 	</div>
-	<div class="command-background-color_wrapper">
+	<div class="commands-background-color_wrapper">
 		<i class="fa fa-font"></i>
-		<div class="command-background-color_pallette">
+		<div class="commands-background-color_pallette">
 			<a href="#" ng-repeat="color in $ctrl.colors" ng-click="$ctrl.doCommand($event)" data-command='backcolor' data-value='#{{color}}' style="background-color: #{{color}};" class="command-background-color_item" >
-				Background {{color}}
 			</a>
 		</div>
 	</div>
 	<a href="#" data-command='bold' ng-click="$ctrl.doCommand($event)" >
-		Bold
+		<i class="fa fa-bold"></i>
 	</a>
 	<a href="#" data-command='italic' ng-click="$ctrl.doCommand($event)" >
-		Italic
+		<i class="fa fa-italic"></i>
 	</a>
 	<a href="#" data-command='underline' ng-click="$ctrl.doCommand($event)" >
-		Underline
+		<i class="fa fa-underline"></i>
 	</a>
 	<a href="#" data-command='strikeThrough' ng-click="$ctrl.doCommand($event)" >
-		Strikethrough
+		<i class="fa fa-strikethrough"></i>
 	</a>
 	<a href="#" data-command='justifyLeft' ng-click="$ctrl.doCommand($event)" >
-		Justifyleft
+		<i class="fa fa-justifyleft"></i>
 	</a>
 	<a href="#" data-command='justifyCenter' ng-click="$ctrl.doCommand($event)" >
-		Justifycenter
+		<i class="fa fa-justifycenter"></i>
 	</a>
 	<a href="#" data-command='justifyRight' ng-click="$ctrl.doCommand($event)" >
-		Justifyright
+		<i class="fa fa-justifyright"></i>
 	</a>
 	<a href="#" data-command='justifyFull' ng-click="$ctrl.doCommand($event)" >
-		Justifyfull
+		<i class="fa fa-justifyfull"></i>
 	</a>
 	<a href="#" data-command='indent' ng-click="$ctrl.doCommand($event)" >
-		Indent
+		<i class="fa fa-indent"></i>
 	</a>
 	<a href="#" data-command='outdent' ng-click="$ctrl.doCommand($event)" >
-		Outdent
+		<i class="fa fa-outdent"></i>
 	</a>
 	<a href="#" data-command='insertUnorderedList' ng-click="$ctrl.doCommand($event)" >
-		Ulist
+		<i class="fa fa-ulist"></i>
 	</a>
 	<a href="#" data-command='insertOrderedList' ng-click="$ctrl.doCommand($event)" >
-		Olist
+		<i class="fa fa-olist"></i>
 	</a>
 	<a href="#" data-command='h1' ng-click="$ctrl.doCommand($event)" >
 		H1
@@ -64,21 +62,21 @@
 		H2
 	</a>
 	<a href="#" data-command='createlink' ng-click="$ctrl.doCommand($event)" >
-		Link
+		<i class="fa fa-link"></i>
 	</a>
 	<a href="#" data-command='unlink' ng-click="$ctrl.doCommand($event)" >
-		Unlink
+		<i class="fa fa-unlink"></i>
 	</a>
 	<a href="#" data-command='insertimage' ng-click="$ctrl.doCommand($event)" >
-		Img
+		<i class="fa fa-image"></i>
 	</a>
 	<a href="#" data-command='p' ng-click="$ctrl.doCommand($event)" >
 		P
 	</a>
 	<a href="#" data-command='subscript' ng-click="$ctrl.doCommand($event)" >
-		Subscribt
+		<i class="fa fa-subscript"></i>
 	</a>
 	<a href="#" data-command='superscript' ng-click="$ctrl.doCommand($event)" >
-		Superscript
+		<i class="fa fa-superscript"></i>
 	</a>
 </div>

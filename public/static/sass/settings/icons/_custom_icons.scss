@@ -1,0 +1,82 @@
+/*General custom styles for icons classes*/
+.fa {
+  &-undo:before {
+    content: $fa-var-undo;
+  }
+  
+  &-repeat:before {
+    content: $fa-var-repeat;
+  }
+  
+  &-font:before {
+    content: $fa-var-font;
+  }
+  
+  &-bold:before {
+    content: $fa-var-bold;
+  }
+  
+  &-italic:before {
+    content: $fa-var-italic;
+  }
+  
+  &-underline:before {
+    content: $fa-var-underline;
+  }
+  
+  &-strikethrough:before {
+    content: $fa-var-strikethrough;
+  }
+  
+  &-justifyleft:before {
+    content: $fa-var-align-left;
+  }
+  
+  &-justifycenter:before {
+    content: $fa-var-align-center;
+  }
+  
+  &-justifyright:before {
+    content: $fa-var-align-right;
+  }
+  
+  &-justifyfull:before {
+    content: $fa-var-align-justify;
+  }
+  
+  &-indent:before {
+    content: $fa-var-indent;
+  }
+  
+  &-outdent:before {
+    content: $fa-var-outdent;
+  }
+  
+  &-ulist:before {
+    content: $fa-var-list-ul;
+  }
+  
+  &-olist:before {
+    content: $fa-var-list-ol;
+  }
+  
+  &-link:before {
+    content: $fa-var-chain;
+  }
+  
+  &-unlink:before {
+    content: $fa-var-chain-broken;
+  }
+  
+  &-image:before {
+    content: $fa-var-image;
+  }
+  
+  &-subscript:before {
+    content: $fa-var-subscript;
+  }
+  
+  &-superscript:before {
+    content: $fa-var-superscript;
+  }
+}
