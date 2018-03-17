@@ -3,7 +3,7 @@
 	<article ng-repeat="post in $postList.posts" id="post-{{post._id}}" class="post post-{{post._id}} type-post format-standard">
 		<header class="entry-header">
 			<div ng-repeat="headerField in $postList.headerFields" ng-if="post[headerField]" class="entry-header_block">
-				<div class="entry-header_internal name {{headerField}}">{{headerField | labelCase}}</div>
+				<div class="entry-header_internal name fa fa-calendar {{headerField}}">{{headerField | labelCase}}</div>
 				<div ng-click="$postList.goToPost(post._id)" class="entry-header_internal value">{{post[headerField] | ISODate}}</div>
 			</div>
 		</header>

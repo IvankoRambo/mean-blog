@@ -1,0 +1,64 @@
+.posts-main {
+	padding: 0 50px;
+}
+
+article {
+	padding-bottom: 50px;
+}
+
+.entry {
+	&-header {
+		&_block {
+			&:first-child {
+				text-align: right;
+				margin-right: 5%;
+				color: #9eabb3;
+			}
+		}
+	
+		&_internal {
+			&.title {
+				display: none;
+				
+				& + .value {
+					font: {
+						weight: 700;
+						size: 24px;
+					}
+					color: #333;
+					line-height: 26px;
+					margin-bottom: 12px;
+					text-align: center;
+				}
+			}
+			
+			&.postDate {
+				font-size: 0;
+				
+				& + .value {
+					display: inline-block;
+					font-size: 14px;
+				}
+				
+				&:before {
+					font-size: 14px;
+				}
+			}
+			
+			&.postDate, &.title {
+				& + .value {
+					cursor: pointer;
+				}
+			}
+		}
+	}
+	
+	&-summary {
+		font: {
+			size: 16px;
+			weight: 300;
+		}
+		line-height: 18px;
+		padding: 0 8%;
+	}
+}

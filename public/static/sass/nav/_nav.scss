@@ -1,0 +1,41 @@
+.navbar.custom-navigation {
+	margin-bottom: 35px;
+	
+	.container-fluid {
+		&--reference {
+			float: right;
+			margin-right: 20px;
+			position: relative;
+			
+			a {
+				text-decoration: none;
+				position: relative;
+				padding-right: 20px;
+				padding-top: 7px;
+				font-size: 35px;
+				color: #000;
+				
+				&.github {
+					float: left;
+				}
+				
+				&.soundcload {
+					position: right;
+				}
+			}
+		}
+	}
+}
+
+.site-up-title {
+	text-align: center;
+	letter-spacing: 3px;
+	font: {
+		weight: bold;
+		size: 40px;
+	}
+	padding: {
+		top: 30px;
+		bottom: 20px;
+	}
+}

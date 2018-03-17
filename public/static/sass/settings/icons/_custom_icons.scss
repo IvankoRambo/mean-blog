@@ -79,4 +79,16 @@
   &-superscript:before {
     content: $fa-var-superscript;
   }
+  
+  &-calendar:before {
+	  content: $fa-var-calendar;
+  }
+  
+  &-github:before {
+      content: $fa-var-github;
+  }
+  
+  &-soundcloud:before {
+	  content: $fa-var-soundcloud;
+  }
 }

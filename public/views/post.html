@@ -2,7 +2,7 @@
 	<div class="loggedin-status" ng-show="$post.loggedIn">You logged in as: {{$post.username}}</div>
 	<header class="entity-header">
 		<div ng-repeat="headerField in $post.headerFields" ng-if="$post.post.post[headerField]" class="entry-header_block">
-			<div class="entry-header_internal name {{headerField}}">{{headerField | labelCase}}</div>
+			<div class="entry-header_internal fa fa-calendar name {{headerField}}">{{headerField | labelCase}}</div>
 			<div class="entry-header_internal value value-{{headerField}}">{{$post.post.post[headerField] | ISODate}}</div>
 		</div>
 	</header>
