@@ -188,8 +188,10 @@ function getPaginatedPosts(PostsResource, timeout, step){
 			
 		postBack.$promise.then(function(response){
 			self.endOfDocument = response.postsCount < self.limit;
-			if(!self.endOfDocument && response.postsCount){
+			if(response.postsCount){
 				self.posts = self.posts.concat(response.posts);
+			}
+			if(!self.endOfDocument && response.postsCount){
 				self.step += self.limit;
 				timeout(function(){
 					getPaginatedPosts.call(self, PostsResource, timeout);
