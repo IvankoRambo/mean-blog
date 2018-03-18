@@ -9,4 +9,4 @@ server.use(express.static('./public'))
 	.get('*', function(req, res){
 		res.sendFile(__dirname + '/public/main.html');
 	})
-	.listen(process.env.PORT || 3000);
+	.listen(process.env.PORT || '3000');
