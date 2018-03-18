@@ -4,10 +4,8 @@
   "description": "IvankoRambo_blog",
   "main": "server.js",
   "dependencies": {
-    "bower": "~1.8.2"
-  },
-  "devDependencies": {
-    "body-parser": "^1.18.2",
+    "bower": "~1.8.2",
+	"body-parser": "^1.18.2",
     "del": "^3.0.0",
     "express": "~4.16.2",
     "express-session": "^1.15.6",
