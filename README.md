@@ -1,6 +1,6 @@
 # mean-blog
 
-_A typical minimalistic blog based on MEAN architecture just for fun_
+_A typical minimalistic blog based on MEAN structure just for fun_
 
 # V1.0
 ### Structure and feature set
