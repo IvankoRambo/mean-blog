@@ -4,8 +4,8 @@ _A typical minimalistic blog based on MEAN structure just for fun_
 
 # V1.0
 ### Structure and feature set
-* Database storage: filebased *NEDB* database
-* Frontend frameword: AngularJS
+* Database storage: filebased [NeDB](https://github.com/louischatriot/nedb) database
+* Frontend framework: AngularJS
 * Backend web framework: ExpressJS
 * Feature set:
   * Infinite scroll
