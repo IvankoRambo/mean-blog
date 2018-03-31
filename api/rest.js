@@ -2,7 +2,8 @@ var express = require('express'),
 	Datastore = require('nedb'),
 	db = {},
 	bodyParser = require('body-parser'),
-	commonHelpers = require('./commonHelpers');
+	commonHelpers = require('./commonHelpers'),
+	publisher = require('./publisher');
 	
 var router = express.Router();
 
@@ -44,7 +45,11 @@ router
 					return;
 				}
 				
-				var postID = newPost._id;
+				var postID = newPost._id,
+					host = req.headers.host,
+					postLink = host + '/posts/' + postID,
+					title = newPost.title;
+				publisher.emit('publish', postLink, title, host);
 				res.status(200);
 				res.json({success: true, postID: newPost._id});
 			});
@@ -108,6 +113,26 @@ router
 			res.status(401);
 			res.json({success: false});
 		}
+	});
+
+router
+	.use(bodyParser.json())
+	.route('/subscribe')
+	.post(function(req, res){
+		var body = req.body,
+			email,
+			subscribeToDB = new Promise(function(resolve, reject){
+				email = body.email;
+				publisher.emit('subscribe', email, resolve, reject);
+			});
+		
+		subscribeToDB.then(function(){
+			res.status(200);
+			res.end();
+		}, function(){
+			res.status(500);
+			res.end();
+		});
 	});
 	
 	
