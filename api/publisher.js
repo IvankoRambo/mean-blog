@@ -16,18 +16,60 @@ publisher.subscribers = new Datastore({
 });
 
 publisher.on('subscribe', function(email, resolve, reject){
+	var pub = this;
 	if(email != null){
-		this.subscribers.insert({'email': email}, function(err){
+		pub.subscribers.findOne({'email': email}, function(err, subscriber){
 			if(err){
 				reject();
 			}
 			else{
-				resolve();
+				if(subscriber != null){
+					resolve({'error': true, 'message': 'You\'re already subscribed'});
+				}
+				else{
+					pub.subscribers.insert({'email': email}, function(err){
+						if(err){
+							reject();
+						}
+						else{
+							resolve({'error': false, 'message': 'You have subscribed!'});
+						}
+					});
+				}
 			}
 		});
 	}
 	else{
-		reject();
+		resolve({'error': true, 'message': 'Please, provide an email to subscribe'});
+	}
+});
+
+publisher.on('unsubscribe', function(email, resolve, reject){
+	var pub = this;
+	if(email != null){
+		pub.subscribers.findOne({'email': email}, function(err, subscriber){
+			if(err){
+				reject();
+			}
+			else{
+				if(subscriber == null){
+					resolve({'message': 'You have already unsubscribed or never subscribed'});
+				}
+				else{
+					pub.subscribers.remove({'email': email}, {}, function(err, removedAmount){
+						if(err || !removedAmount){
+							reject();
+						}
+						else{
+							resolve({'message': 'You have successfully unsubscribed. I hope, you\'ll get back some day.'});
+						}
+					});
+				}
+			}
+		});
+	}
+	else{
+		resolve({'message': 'Please, provide an email to unsubscribe'});
 	}
 });
 
@@ -40,21 +82,23 @@ publisher.on('publish', function(link, title, host){
 						unsubscribeLink = host + '/unsubscribe?email=' + currentEmail;
 					
 					ejs.renderFile('./api/templates/notify/html.ejs', {link: link, title: title, unsubscribeLink: unsubscribeLink}, function(err, htmlContent){
-						var emailOptions = {
-							from: emailSettings.username,
-							to: currentEmail,
-							subject: 'Check out new the post from IR blog!',
-							html: htmlContent
-						};
-						
-						transporter.sendMail(emailOptions, function(err, info){
-							if(err){
-								console.log(err);
-							}
-							else{
-								console.log("The response: " + info.response);
-							}
-						});
+						if(!err){
+							var emailOptions = {
+								from: emailSettings.username,
+								to: currentEmail,
+								subject: 'Check out new the post from IR blog!',
+								html: htmlContent
+							};
+								
+							transporter.sendMail(emailOptions, function(err, info){
+								if(err){
+									console.log(err);
+								}
+								else{
+									console.log("The response: " + info.response);
+								}
+							});
+						}
 					});
 				}
 			}

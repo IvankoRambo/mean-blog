@@ -126,9 +126,23 @@ router
 				publisher.emit('subscribe', email, resolve, reject);
 			});
 		
-		subscribeToDB.then(function(){
+		subscribeToDB.then(function(info){
 			res.status(200);
+			res.json(info);
+		}, function(){
+			res.status(500);
 			res.end();
+		});
+	})
+	.delete(function(req, res){
+		var email = req.query.email,
+			unsubscribeFromDB = new Promise(function(resolve, reject){
+				publisher.emit('unsubscribe', email, resolve, reject);
+			});
+		
+		unsubscribeFromDB.then(function(info){
+			res.status(200);
+			res.json(info);
 		}, function(){
 			res.status(500);
 			res.end();
