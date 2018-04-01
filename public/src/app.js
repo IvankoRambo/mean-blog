@@ -26,11 +26,6 @@ angular.module('IvankoRambo', ['ngRoute', 'ngResource', 'ngSanitize'])
 				templateUrl: 'views/newPost.html',
 				controllerAs: '$newPost'
 			})
-			.when('/unsubscribe', {
-				controller: 'UnsubscribeController',
-				templateUrl: 'views/unsubscribe.html',
-				controllerAs: '$unsubscribe'
-			})
 			.otherwise({
 				redirectTo: '/posts'
 			});
@@ -40,8 +35,4 @@ angular.module('IvankoRambo', ['ngRoute', 'ngResource', 'ngSanitize'])
 	})
 	.run(function($rootScope){
 		$rootScope.colors = ['000000', 'FF9966', '6699FF', '99FF66', 'CC0000', '00CC00', '0000CC', '333333', '0066FF', 'FFFFFF'];
-		$rootScope.showSubscribePopup = false;
-		$rootScope.triggerShowSubscribtionPopup = function(){
-			$rootScope.$broadcast('show.popup');
-		}
 	});

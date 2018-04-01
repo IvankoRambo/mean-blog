@@ -20,25 +20,6 @@
 				}
 			}
 		}
-		
-		&--subscribe {
-			ul {
-				margin-left: 80px;
-			}
-			
-			li {
-				padding-top: 15px;
-				padding-bottom: 15px;
-				width: 120px;
-				text-align: center;
-				cursor: pointer;
-				background-color: #e5e2bd;
-				
-				&:hover {
-					background-color: #e7dfaf;
-				}
-			}
-		}
 	}
 }
 
@@ -52,103 +33,5 @@
 	padding: {
 		top: 30px;
 		bottom: 20px;
-	}
-}
-
-/*
-* Subscribe popup
-*/
-
-.subscribe-popup {
-	display: block;
-	position: fixed;
-	padding: 10px;
-	width: 300px;
-	left: 45%;
-	top: 40%;
-	margin-top: -10px;
-	height: 160px;
-	background: #fff;
-	z-index: 20;
-	
-	&_close {
-		cursor: pointer;
-		text-align: right;
-		padding: 0 5px 10px 0;
-		font-size: 12px;
-	}
-	
-	&_submit {
-		& > p {
-			font: {
-				weight: bold;
-				size: 16px;
-			}
-			text-align: center;
-		}
-		
-		form {
-			.signature {
-				text-align: left;
-				margin-bottom: 5px;
-			}
-			
-			input {
-				display: inline-block;
-				
-				&[type="email"] {
-					border-radius: 5px;
-					height: 20px;
-					padding-top: 13px;
-					padding-bottom: 13px;
-					border: 1px solid #b0afaf;
-				}
-				
-				&[type="submit"] {
-					color: #234253;
-					background: transparent;
-					border-radius: 10px;
-					border: 1px solid #4a53BA;
-				}
-			}
-		}
-	}
-	
-	&_status {
-		text-align: center;
-		font: {
-			weight: bold;
-			size: 15px;
-		}
-		margin-top: 30px;
-		margin-left: 10px;
-		margin-right: 10px;
-		border-bottom: 1px solid green;
-		
-		&.error {
-			border-bottom: 1px solid red;
-		}
-	}
-	
-	&:after {
-		position: fixed;
-		content: "";
-		top: 0;
-		left: 0;
-		bottom: 0;
-		right: 0;
-		background: rgba(0, 0, 0, 0.5);
-		z-index: -2;
-	}
-	
-	&:before {
-		position: absolute;
-		content: "";
-		top: 0;
-		left: 0;
-		bottom: 0;
-		right: 0;
-		background: #fff;
-		z-index: -1;
 	}
 }
