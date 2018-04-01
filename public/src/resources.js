@@ -22,4 +22,26 @@ angular.module('IvankoRambo')
 				});
 			}
 		};
+	})
+	.factory('Subscribes', function($http){
+		var subscribeUrl = '/api/subscribe';
+		
+		return {
+			set: function(data){
+				return $http({
+					method: 'POST',
+					url: subscribeUrl,
+					data: data,
+					header: {'Content-Type': 'application/json'}
+				});
+			},
+			delete: function(data){
+				return $http({
+					method: 'DELETE',
+					url: subscribeUrl,
+					params: data,
+					header: {'Content-Type': 'application/json'}
+				});
+			}
+		}
 	});

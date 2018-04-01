@@ -136,6 +136,21 @@ angular.module('IvankoRambo')
 	.controller('AboutController', ['$rootScope', function($rS){
 		$rS.PAGE = 'about';
 	}])
+	.controller('UnsubscribeController', ['$rootScope', 'Subscribes', '$location',
+	                                      function($rS, Subscribes, $l){
+		var self = this,
+			params = $l.search();
+		
+		$rS.PAGE = 'unsubscribe';
+		Subscribes.delete(params)
+			.then(function(response){
+				var data = response.data;
+				if(data){
+					self.subscribeResponse = data.message;
+				}
+			});
+		
+	}])
 	.controller('LoginController', ['$rootScope', 'Users', '$location',
 	                                function($rS, Users, $l){
 		var self = this;

@@ -1,0 +1,14 @@
+<div ng-show="$ctrl.showSubscribePopup" class="subscribe-popup">
+	<div class="subscribe-popup_close" ng-click="$ctrl.triggerHideSubscribtionPopup()" >X</div>
+	<div class="subscribe-popup_submit" ng-show="!$ctrl.submitted" >
+		<p>Enter your email to subscribe!</p>
+		<form name="subscribeForm" ng-submit="subscribeForm.$valid && $ctrl.submitForm(subscribeForm, $event)" class="subscribe-popup_form">
+			<p class="signature">Your email</p>
+			<input type="email" name="email" ng-required="true" ng-model="$ctrl.emailAddress" >
+			<input type="submit" value="Subscribe" />
+		</form>
+	</div>
+	<div class="subscribe-popup_status" ng-class='{"error": $ctrl.subscribeResponse.error}' ng-show="$ctrl.submitted && $ctrl.subscribeResponse" >
+		{{$ctrl.subscribeResponse.message}}
+	</div>
+</div>

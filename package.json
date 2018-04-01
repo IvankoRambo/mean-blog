@@ -4,15 +4,17 @@
   "description": "IvankoRambo_blog",
   "main": "server.js",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "bower": "~1.8.2",
-	"body-parser": "^1.18.2",
     "del": "^3.0.0",
+    "ejs": "^2.5.8",
     "express": "~4.16.2",
     "express-session": "^1.15.6",
     "gulp": "^3.9.1",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.4",
     "nedb": "^1.8.0",
+    "nodemailer": "^4.6.4",
     "nodemon": "^1.12.1"
   },
   "scripts": {
