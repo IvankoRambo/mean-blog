@@ -10,7 +10,7 @@ _A typical minimalistic blog based on MEAN structure just for fun_
 * Feature set:
   * Infinite scroll
   * Admin editor panel
-  * Push notifications (in progress)
+  * Push notifications
 ### Installation guide
 * Do *npm install* in a command shell to install _gulp_ and other needed dependencies
 * Do *bower install* in a command shell to install frontend libraries
