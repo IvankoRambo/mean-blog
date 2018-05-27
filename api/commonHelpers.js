@@ -1,4 +1,7 @@
-var crypto = require('crypto');
+var crypto = require('crypto'),
+	fs = require('fs'),
+	AWS = require('aws-sdk'),
+	configAWS = require('./../configSet/configAWS.json');
 
 module.exports = {
 	getISODate: function(){
@@ -27,5 +30,30 @@ module.exports = {
 		}
 		
 		return text;
+	},
+	
+	uploadToS3Bucket: function(filePath, key){
+		AWS.config.update({
+			accessKeyId: configAWS.accessKeyId,
+			secretAccessKey: configAWS.secretAccessKey,
+			region: configAWS.region
+		});
+		
+		fs.readFile(filePath, function(err, data){
+			if(err){
+				throw err;
+			}
+			
+			var binaryData = new Buffer(data, 'binary'),
+				s3 = new AWS.S3();
+			s3.putObject({
+				Bucket: configAWS.Bucket,
+				Key: key,
+				Body: binaryData,
+				ACL: 'public-read'
+			}, function(resp){
+				console.log('Successfully uploaded package', key);
+			});
+		});
 	}
 };

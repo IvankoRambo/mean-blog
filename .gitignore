@@ -2,6 +2,7 @@
 node_modules
 public/lib
 db
+configSet
 public/static/sasstarget
 public/static/images
 .sass-cache
