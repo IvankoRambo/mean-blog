@@ -1,3 +1,9 @@
+.container {
+	@include mobile-tablet {
+		width: 100vw;
+	}
+}
+
 .posts-main {
 	padding: 0 50px;
 }

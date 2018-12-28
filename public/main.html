@@ -6,15 +6,16 @@
 		<link type="text/css" rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
 		<link type="text/css" rel="stylesheet" href="static/sasstarget/style.css" />
 	</head>
-	<body>
+	<body ng-class='{"nav-mobile-active": mobileMenuToggler === true}'>
 		<div class="container">
 			<div class="row site-nav-part">
 				<div class="site-up-title">IvankoRambo</div>
-				<div class="nav" ng-include='"views/navigation.html"'></div>
+				<div class="nav nav-main" ng-include='"views/navigation.html"'></div>
 			</div>
 			<div class="row site-main-part">
 				<div class="col-sm-12" ng-view></div>
 			</div>
+			<div class="menu-overlay"></div>
 		</div>
 		
 		<script type="application/javascript" src="lib/jquery/dist/jquery.min.js"></script>

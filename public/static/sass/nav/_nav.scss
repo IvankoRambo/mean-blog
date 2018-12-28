@@ -1,11 +1,24 @@
 .navbar.custom-navigation {
 	margin-bottom: 35px;
+
+	@include mobile-tablet {
+		margin-bottom: 0;
+	}
 	
 	.container-fluid {
 		&--reference {
 			float: right;
 			margin-right: 20px;
 			position: relative;
+
+			@include mobile-tablet {
+				float: none;
+				margin-top: 5px;
+				margin-left: 15px;
+				margin-bottom: 50px;
+				position: absolute;
+				bottom: 0;
+			}
 			
 			a {
 				text-decoration: none;
@@ -17,6 +30,15 @@
 				
 				&.github {
 					float: left;
+
+					@include mobile-tablet {
+						float: none;
+					}
+				}
+
+				@include mobile-tablet {
+					padding-right: 40px;
+					font-size: 55px;
 				}
 			}
 		}
@@ -24,6 +46,12 @@
 		&--subscribe {
 			ul {
 				margin-left: 80px;
+
+				@include mobile-tablet {
+					margin-left: 2px;
+					padding-left: 15px;
+					padding-right: 15px;
+				}
 			}
 			
 			li {
@@ -36,7 +64,31 @@
 				
 				&:hover {
 					background-color: #e7dfaf;
+
+					@include mobile-tablet {
+						background-color: transparent;
+					}
 				}
+
+				@include mobile-tablet {
+					background-color: transparent;
+					font: {
+						size: 3.7em;
+						weight: bold;
+					}
+					line-height: 1.3em;
+					padding-top: 0;
+					width: initial;
+					border-bottom: 4px solid #e5e2bd;
+					padding-bottom: 0;
+					margin-bottom: 20px;
+				}
+			}
+		}
+
+		&--menu {
+			@include mobile-tablet {
+				padding: 20px 15px 20px;
 			}
 		}
 	}
@@ -52,6 +104,200 @@
 	padding: {
 		top: 30px;
 		bottom: 20px;
+	}
+
+	@include mobile-tablet {
+		display: none;
+	}
+}
+
+.nav {
+
+	$nav: &;
+
+	&-mobile-active {
+		#{$nav}-wrapper {
+			@include mobile-tablet {
+				height: initial;
+			}
+		}
+
+		.navbar {
+			@include mobile-tablet {
+				transform: translate3d(-100vw, 0px, 0px)
+			}
+
+			&-mobile-menu > span {
+				&:nth-child(1) {
+					left: 1px;
+					top: 2px;
+				}
+
+				&:nth-child(1),
+				&:nth-child(6) {
+					-webkit-transform: rotate(45deg);
+					transform: rotate(45deg);
+				}
+
+				&:nth-child(2) {
+					left: calc(50% - 2px);
+					top: 2px;
+				}
+
+				&:nth-child(2),
+				&:nth-child(5) {
+					-webkit-transform: rotate(-45deg);
+					transform: rotate(-45deg);
+				}
+
+				&:nth-child(3),
+				&:nth-child(4) {
+					left: 100%;
+					opacity: 0;
+					top: 7px;
+				}
+
+				&:nth-child(5) {
+					left: 1px;
+					top: 10px;
+				}
+
+				&:nth-child(6) {
+					left: calc(50% - 2px);
+					top: 10px;
+				}
+			}
+		}
+
+
+	}
+
+	&-wrapper {
+		@include mobile-tablet {
+			position: relative;
+			display: block;
+			height: 80px;
+			width: 100vw;
+			margin: 0 auto;
+			justify-content: space-between;
+			overflow: hidden;
+		}
+	}
+
+	&-main {
+		@include mobile-tablet {
+			position: fixed;
+			z-index: 100;
+			top: 0;
+			background: #f8f8f8;
+			border-color: #e7e7e7;
+			height: 80px;
+			width: 100vw;
+		}
+	}
+}
+
+.navbar {
+
+	@include mobile-tablet {
+		height: calc(100vh - 80px);
+		width: 100%;
+		background: #f8f8f8;
+		border-color: #e7e7e7;
+		border-top-color: transparent;
+		transition: transform 500ms ease, -webkit-transform 500ms ease;
+		padding: 0 0 40px 0;
+		text-align: left;
+		margin: 75px 10px 0 100vw;
+	}
+
+	&-mobile-menu {
+		display: none;
+		width: 24px;
+		height: 18px;
+		margin: 30px 30px 0 0;
+		position: relative;
+		-webkit-transform: rotate(0deg);
+		-moz-transform: rotate(0deg);
+		-o-transform: rotate(0deg);
+		transform: rotate(0deg);
+		-webkit-transition: .5s ease-in-out;
+		-moz-transition: .5s ease-in-out;
+		-o-transition: .5s ease-in-out;
+		transition: .5s ease-in-out;
+		cursor: pointer;
+		position: absolute;
+		top: 0;
+		right: 0;
+
+		@include mobile-tablet {
+			display: block;
+			float: right;
+		}
+
+		> span {
+			display: block;
+			position: absolute;
+			height: 4px;
+			width: 50%;
+			background: black;
+			opacity: 1;
+			-weblit-transform: rotate(0deg);
+			-moz-transform: rotate(0deg);
+			-o-transform: rotate(0deg);
+			transform: rotate(0deg);
+			-webkit-transition: .25s ease-in-out;
+			-moz-transition: .25s ease-in-out;
+			-o-transition: .25s ease-in-out;
+			transition: .25s ease-in-out;
+
+			&:nth-child(even) {
+				left: 50%;
+			}
+
+			&:nth-child(odd) {
+				left: 0;
+			}
+
+			&:nth-child(1),
+			&:nth-child(2) {
+				top: 0;
+			}
+
+			&:nth-child(3),
+			&:nth-child(4) {
+				top: 7px;
+			}
+
+			&:nth-child(5),
+			&:nth-child(6) {
+				top: 14px;
+			}
+		}
+	}
+
+	&-nav {
+
+		@include mobile-tablet {
+			float: none;
+			width: 30%;
+		}
+
+		& > li {
+			@include mobile-tablet {
+				float: none;
+			}
+
+			& > a {
+				@include mobile-tablet {
+					font: {
+						size: 3.5em;
+						weight: bold;
+					}
+					line-height: 1.1em;
+				}
+			} 
+		}
 	}
 }
 

@@ -1,0 +1,19 @@
+html,
+body {
+	height: 100%;
+	max-width: 100%;
+	min-width: 100%;
+	width: 100%;
+}
+
+.site-main-part {
+	@include mobile-tablet {
+		margin-top: 80px;
+	}
+}
+
+.col-sm-12 {
+	@include mobile-tablet {
+		margin-top: 20px;
+	}
+}
