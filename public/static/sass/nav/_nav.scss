@@ -6,6 +6,44 @@
 	}
 	
 	.container-fluid {
+		position: relative;
+
+		@include mobile-tablet {
+			position: static;
+		}
+
+
+		&--filter {
+			position: absolute;
+			top: 20%;
+			right: 20%;
+
+			@include mobile-tablet {
+				position: static;
+				margin: 15px 5px 0;
+			}
+
+			@include tablet-desktop {
+				display: inline-block;
+				margin: 0;
+				vertical-align: top;
+				padding: 20px 15px 20px;
+			}
+
+			& > select {
+				background-color: #e5e2bd;
+				border-color: #e7e7e7;
+				font-size: 14px;
+				line-height: 16px;
+				padding: 5px;
+
+				@include mobile-tablet {
+					font-size: 16px;
+					line-height: 18px;
+				}
+			}
+		}
+
 		&--reference {
 			float: right;
 			margin-right: 20px;
@@ -18,6 +56,15 @@
 				margin-bottom: 50px;
 				position: absolute;
 				bottom: 0;
+			}
+
+			@include tablet-desktop {
+				right: 0;
+				margin-bottom: 10px;
+			}
+
+			@include mobile {
+				left: 0;
 			}
 			
 			a {
@@ -37,20 +84,45 @@
 				}
 
 				@include mobile-tablet {
-					padding-right: 40px;
-					font-size: 55px;
+					padding-right: 30px;
+					font-size: 40px;
+				}
+
+				@include tablet-desktop {
+					padding-right: 15px;
+					font-size: 25px;
 				}
 			}
 		}
 		
 		&--subscribe {
+
+			.navbar-nav {
+				@include tablet-desktop {
+					width: 100%;
+				}
+			}
+
+			@include tablet-desktop {
+				position: absolute;
+				bottom: 13%;
+				right: 0;
+				margin-right: 28px;
+			}
+
 			ul {
 				margin-left: 80px;
 
 				@include mobile-tablet {
-					margin-left: 2px;
+					margin-left: -10px;
 					padding-left: 15px;
 					padding-right: 15px;
+				}
+
+				@include tablet-desktop {
+					margin-left: 0;
+					padding-left: 30px;
+					padding-right: 30px;
 				}
 			}
 			
@@ -73,15 +145,20 @@
 				@include mobile-tablet {
 					background-color: transparent;
 					font: {
-						size: 3.7em;
+						size: 30px;
 						weight: bold;
 					}
-					line-height: 1.3em;
+					line-height: 32px;
 					padding-top: 0;
 					width: initial;
 					border-bottom: 4px solid #e5e2bd;
 					padding-bottom: 0;
 					margin-bottom: 20px;
+				}
+
+				@include tablet-desktop {
+					font-size: 16px;
+					line-height: 18px;
 				}
 			}
 		}
@@ -89,6 +166,11 @@
 		&--menu {
 			@include mobile-tablet {
 				padding: 20px 15px 20px;
+			}
+
+			@include tablet-desktop {
+				width: 35%;
+				display: inline-block;
 			}
 		}
 	}
@@ -182,6 +264,30 @@
 			justify-content: space-between;
 			overflow: hidden;
 		}
+
+		&-title--mobile {
+			display: none;
+			color: #000;
+			margin-left: 30px;
+			float: left;
+			line-height: 80px;
+			font: {
+				size: 24px;
+				weight: 700;
+			}
+
+			& > a {
+				color: #000;
+
+				&:hover {
+					text-decoration: none;
+				}
+			}
+
+			@include mobile-tablet {
+				display: block;
+			}
+		}
 	}
 
 	&-main {
@@ -200,7 +306,6 @@
 .navbar {
 
 	@include mobile-tablet {
-		height: calc(100vh - 80px);
 		width: 100%;
 		background: #f8f8f8;
 		border-color: #e7e7e7;
@@ -209,6 +314,14 @@
 		padding: 0 0 40px 0;
 		text-align: left;
 		margin: 75px 10px 0 100vw;
+	}
+
+	@include tablet-desktop {
+		height: calc(90vh - 100px);
+	}
+
+	@include mobile {
+		height: calc(100vh - 60px);
 	}
 
 	&-mobile-menu {
@@ -280,7 +393,7 @@
 
 		@include mobile-tablet {
 			float: none;
-			width: 30%;
+			width: 55%;
 		}
 
 		& > li {
@@ -291,10 +404,15 @@
 			& > a {
 				@include mobile-tablet {
 					font: {
-						size: 3.5em;
+						size: 24px;
 						weight: bold;
 					}
-					line-height: 1.1em;
+					line-height: 26px;
+				}
+
+				@include tablet-desktop {
+					font-size: 16px;
+					line-height: 18px;
 				}
 			} 
 		}
@@ -316,6 +434,18 @@
 	height: 160px;
 	background: #fff;
 	z-index: 20;
+
+	@include mobile-tablet {
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 20%;
+		margin-top: 0px;
+	}
+
+	@include tablet-desktop {
+		height: 40%;
+	}
 	
 	&_close {
 		cursor: pointer;
@@ -356,6 +486,14 @@
 					border-radius: 10px;
 					border: 1px solid #4a53BA;
 				}
+			}
+
+			@include mobile-tablet {
+				margin-left: 17%;
+			}
+
+			@include tablet-desktop {
+				margin-left: 36%;
 			}
 		}
 	}

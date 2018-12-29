@@ -1,6 +1,6 @@
 .container {
 	@include mobile-tablet {
-		width: 100vw;
+		width: 100%;
 	}
 }
 
@@ -19,6 +19,11 @@ article {
 				text-align: right;
 				margin-right: 5%;
 				color: #9eabb3;
+
+				@include mobile-tablet {
+					text-align: center;
+					margin-bottom: 5px;
+				}
 			}
 		}
 	
@@ -66,5 +71,11 @@ article {
 		}
 		line-height: 18px;
 		padding: 0 8%;
+
+		@include mobile-tablet {
+			font-size: 19px;
+			line-height: 21px;
+			padding: 0;
+		}
 	}
 }

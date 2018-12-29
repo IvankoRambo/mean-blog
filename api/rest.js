@@ -17,10 +17,12 @@ router
 	.route('/posts')
 	.get(function(req, res){
 		var limitParam = parseInt(req.query.limit) || 0,
-			stepParam = parseInt(req.query.step) || 0;
+			stepParam = parseInt(req.query.step) || 0,
+			filterID = req.query.filter,
+			filterQuery = filterID === 'all' ? {} : { filter: filterID };
 		
 		db.posts.loadDatabase(function(dbErr){
-			db.posts.find({}).sort({postDate: -1}).skip(stepParam).limit(limitParam).exec(function(err, data){
+			db.posts.find(filterQuery).sort({postDate: -1}).skip(stepParam).limit(limitParam).exec(function(err, data){
 				if(err || data == null){
 					res.status(404);
 					res.end();

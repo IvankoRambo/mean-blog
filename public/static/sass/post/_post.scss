@@ -6,5 +6,9 @@
 		}
 		line-height: 18px;
 		padding-bottom: 30px;
+
+		@include mobile-tablet {
+			padding-right: 5px;
+		}
 	}
 }

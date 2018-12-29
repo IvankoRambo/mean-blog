@@ -1,18 +1,26 @@
 <div class="nav-wrapper">
+	<div class="nav-wrapper-title--mobile" ng-click="hideMobileMenu($event, true)"><a href="/posts">I.R.</a></div>
 	<nav class="navbar navbar-default custom-navigation">
 		<div class="container-fluid">
 			<div class="container-fluid--logo">
 			</div>
 			<div class="container-fluid--menu">
 				<ul class="nav navbar-nav">
-					<li ng-class='{"active": PAGE === "posts", "active-custom": PAGE === "posts"}'><a href="/posts">Posts</a></li>
-					<li ng-class='{"active": PAGE === "about", "active-custom": PAGE === "about"}'><a href="/about">About</a></li>
+					<li ng-class='{"active": PAGE === "posts", "active-custom": PAGE === "posts"}' ng-click="hideMobileMenu($event)"><a href="/posts">Posts</a></li>
+					<li ng-class='{"active": PAGE === "about", "active-custom": PAGE === "about"}' ng-click="hideMobileMenu($event)"><a href="/about">About</a></li>
 				</ul>
 			</div>
 			<div class="container-fluid--subscribe">
 				<ul class="nav navbar-nav">
 					<li ng-click="triggerShowSubscribtionPopup()">Subscribe</li>
 				</ul>
+			</div>
+			<div class="container-fluid--filter">
+				<select ng-model="selectedFilter"
+					ng-init="selectedFilter = selectedFilter || filters[0]"
+					ng-options="filter as filter.label disable when filter.disabled for filter in filters"
+					ng-change="updateFilter(selectedFilter)">
+				</select>
 			</div>
 			<div class="container-fluid--reference">
 				<a href="https://github.com/IvankoRambo" target="_blank" class="github fa fa-github"></a>

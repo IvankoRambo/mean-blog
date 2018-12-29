@@ -6,7 +6,8 @@ angular.module('IvankoRambo')
 		$rS.PAGE = 'posts';
 		this.limit = 5;
 		this.step = 0;
-		this.checkSum = 5;
+		this.falseCount = false;
+		this.filterID = $rS.selectedFilter ? $rS.selectedFilter.id : 'all';
 		this.endOfDocument = false;
 		this.posts = [];
 		
@@ -17,6 +18,14 @@ angular.module('IvankoRambo')
 		this.loggedIn = false;
 		
 		checkUserStatus.call(this, Users);
+
+		$rS.$on('start.counter', function(){
+			self.step = 0;
+			self.posts = [];
+			self.filterID = $rS.selectedFilter ? $rS.selectedFilter.id : 'all;'
+			self.endOfDocument = false;
+			getPaginatedPosts.call(self, Posts, $time);
+		});
 		
 		this.sort = function sort(field){
 			this.sort.field = field;
@@ -33,14 +42,13 @@ angular.module('IvankoRambo')
 		
 		this.paginateOnScroll = function(eventName){
 			self.step += self.limit;
-			var postBack = Posts.query({step: self.step, limit: self.limit});
-			postBack.$promise.then(function(response){
-				self.endOfDocument = response.postsCount < self.limit;
-				self.posts = self.posts.concat(response.posts);
-				if(self.endOfDocument){
-					angular.element(window).off(eventName);
-				}
-			});
+			if(!self.endOfDocument){
+				var postBack = Posts.query({step: self.step, limit: self.limit, filter: self.filterID});
+				postBack.$promise.then(function(response){
+					self.endOfDocument = response.postsCount < self.limit;
+					self.posts = self.posts.concat(response.posts);
+				});
+			}
 		}
 	}])
 	.controller('PostController', ['$routeParams', 'Posts', 'Users', '$rootScope', '$location', 
@@ -115,7 +123,8 @@ angular.module('IvankoRambo')
 			if(text){
 				saveData = {
 					title: self.titleText,
-					text: text.innerHTML
+					text: text.innerHTML,
+					filter: self.postFilter
 				};
 				
 				Posts.save({}, saveData).$promise.then(function(data){
@@ -199,7 +208,7 @@ function getPaginatedPosts(PostsResource, timeout, step){
 	
 	if(step === 0 || (lastPostBlock && postBottom < viewPortBottom)){
 		var self = this;
-		var postBack = PostsResource.query({limit: self.limit, step: step});
+		var postBack = PostsResource.query({limit: self.limit, step: step, filter: self.filterID});
 			
 		postBack.$promise.then(function(response){
 			self.endOfDocument = response.postsCount < self.limit;
@@ -208,11 +217,16 @@ function getPaginatedPosts(PostsResource, timeout, step){
 			}
 			if(!self.endOfDocument && response.postsCount){
 				self.step += self.limit;
+				self.falseCount = true;
 				timeout(function(){
 					getPaginatedPosts.call(self, PostsResource, timeout);
 				});
 			}
 		});
+	}
+	else if(this.falseCount){
+		this.falseCount = false;
+		this.step -= this.limit;
 	}
 }
 
