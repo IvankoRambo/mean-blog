@@ -55,16 +55,18 @@
 				margin-left: 15px;
 				margin-bottom: 50px;
 				position: absolute;
-				bottom: 0;
+			}
+
+			@include mobile {
+				bottom: 10%;
+				left: 0;
 			}
 
 			@include tablet-desktop {
 				right: 0;
+				left: auto;
+				bottom: 0;
 				margin-bottom: 10px;
-			}
-
-			@include mobile {
-				left: 0;
 			}
 			
 			a {
@@ -316,12 +318,12 @@
 		margin: 75px 10px 0 100vw;
 	}
 
-	@include tablet-desktop {
-		height: calc(90vh - 100px);
-	}
-
 	@include mobile {
 		height: calc(100vh - 60px);
+	}
+
+	@include tablet-desktop {
+		height: calc(90vh - 100px);
 	}
 
 	&-mobile-menu {
@@ -439,7 +441,7 @@
 		left: 0;
 		top: 0;
 		width: 100%;
-		height: 20%;
+		height: 30%;
 		margin-top: 0px;
 	}
 
