@@ -160,6 +160,12 @@ angular.module('IvankoRambo')
 			});
 		
 	}])
+	.controller('MyLovelyController', ['$rootScope',
+									function ($rS) {
+		this.submitForm = function submitForm(form, evt) {
+			evt.preventDefault();
+		}
+	}])
 	.controller('LoginController', ['$rootScope', 'Users', '$location',
 	                                function($rS, Users, $l){
 		var self = this;

@@ -9,7 +9,7 @@ var express = require('express'),
 var expressApp = express();
 
 expressApp.set('view engine', 'ejs');
-	
+
 server.use(express.static('./public'))
 	.use('/api', user)
 	.use('/api', api)

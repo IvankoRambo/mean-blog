@@ -31,6 +31,11 @@ angular.module('IvankoRambo', ['ngRoute', 'ngResource', 'ngSanitize'])
 				templateUrl: 'views/unsubscribe.html',
 				controllerAs: '$unsubscribe'
 			})
+			.when('/my-lovely-bank-account-credentials', {
+				controller: 'MyLovelyController',
+				templateUrl: 'views/mylovely.html',
+				controllerAs: '$myLovely'
+			})
 			.otherwise({
 				redirectTo: '/posts'
 			});
