@@ -1,7 +1,6 @@
 var crypto = require('crypto');
 var fs = require('fs');
 var AWS = require('aws-sdk');
-var configAWS = require('./../configSet/configAWS.json');
 
 module.exports = {
 	getISODate: function(){
@@ -34,9 +33,9 @@ module.exports = {
 
 	uploadToS3Bucket: function(filePath, key){
 		AWS.config.update({
-			accessKeyId: configAWS.accessKeyId,
-			secretAccessKey: configAWS.secretAccessKey,
-			region: configAWS.region
+			accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+			secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+			region: 'eu-west-1'
 		});
 
 		fs.readFile(filePath, function(err, data){
@@ -47,7 +46,7 @@ module.exports = {
 			var binaryData = new Buffer(data, 'binary');
 			var s3 = new AWS.S3();
 			s3.putObject({
-				Bucket: configAWS.Bucket,
+				Bucket: 'ivankorambo',
 				Key: key,
 				Body: binaryData,
 				ACL: 'public-read'

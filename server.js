@@ -4,7 +4,6 @@ var api = require('./api/rest');
 var user = require('./api/user');
 var fs = require('fs');
 var AWS = require('aws-sdk');
-//var configAWS = require('./configSet/configAWS.json');
 
 var expressApp = express();
 
@@ -18,32 +17,32 @@ server.use(express.static('./public'))
 	})
 	.listen('3000', function(){
 		AWS.config.update({
-			accessKeyId: configAWS.accessKeyId,
-			secretAccessKey: configAWS.secretAccessKey,
-			region: configAWS.region
+			accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+			secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+			region: 'eu-west-1'
 		});
 		console.log('Try to download file of posts');
-		var s3 = new AWS.S3(),
-			postsOptions = {
-				Bucket: configAWS.Bucket,
-				Key:	'posts'
-			},
-			subscribersOptions = {
-				Bucket: configAWS.Bucket,
-				Key:	'subscribers'
-			},
-			emailOptions = {
-				Bucket: configAWS.Bucket,
-				Key:	'emailSettings'
-			},
-			usersOptions = {
-				Bucket:	configAWS.Bucket,
-				Key:	'users'
-			},
-			postsFile = fs.createWriteStream('db/posts'),
-			subscribersFile = fs.createWriteStream('db/subscribers'),
-			emailSettingsFile = fs.createWriteStream('db/emailSettings'),
-			usersFile = fs.createWriteStream('db/users');
+		var s3 = new AWS.S3();
+		var postsOptions = {
+			Bucket: 'ivankorambo',
+			Key:	'posts'
+		};
+		var subscribersOptions = {
+			Bucket: 'ivankorambo',
+			Key:	'subscribers'
+		};
+		var emailOptions = {
+			Bucket: 'ivankorambo',
+			Key:	'emailSettings'
+		};
+		var usersOptions = {
+			Bucket:	'ivankorambo',
+			Key:	'users'
+		};
+		var postsFile = fs.createWriteStream('db/posts');
+		var subscribersFile = fs.createWriteStream('db/subscribers');
+		var emailSettingsFile = fs.createWriteStream('db/emailSettings');
+		var usersFile = fs.createWriteStream('db/users');
 		s3.getObject(postsOptions).createReadStream().pipe(postsFile);
 		console.log('try to download file of subscribers');
 		s3.getObject(subscribersOptions).createReadStream().pipe(subscribersFile);
