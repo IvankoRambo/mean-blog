@@ -1,11 +1,11 @@
-var express = require('express'),
-	fs = require('fs'),
-	Datastore = require('nedb'),
-	db = {},
-	bodyParser = require('body-parser'),
-	commonHelpers = require('./commonHelpers'),
-	publisher = require('./publisher');
-	
+var express = require('express');
+var fs = require('fs');
+var Datastore = require('nedb');
+var db = {};
+var bodyParser = require('body-parser');
+var commonHelpers = require('./commonHelpers');
+var publisher = require('./publisher');
+
 var router = express.Router();
 
 db.posts = new Datastore({
@@ -16,11 +16,11 @@ db.posts = new Datastore({
 router
 	.route('/posts')
 	.get(function(req, res){
-		var limitParam = parseInt(req.query.limit) || 0,
-			stepParam = parseInt(req.query.step) || 0,
-			filterID = req.query.filter,
-			filterQuery = filterID === 'all' ? {} : { filter: filterID };
-		
+		var limitParam = parseInt(req.query.limit) || 0;
+		var stepParam = parseInt(req.query.step) || 0;
+		var filterID = req.query.filter;
+		var filterQuery = filterID === 'all' ? {} : { filter: filterID };
+
 		db.posts.loadDatabase(function(dbErr){
 			db.posts.find(filterQuery).sort({postDate: -1}).skip(stepParam).limit(limitParam).exec(function(err, data){
 				if(err || data == null){
@@ -33,7 +33,7 @@ router
 			});
 		});
 	});
-	
+
 router
 	.use(bodyParser.urlencoded({extended: false}))
 	.use(bodyParser.json())
@@ -41,7 +41,7 @@ router
 	.post(function(req, res){
 		var post = req.body;
 		post.postDate = new Date().getTime();
-		
+
 		if(req.session.userId){
 			db.posts.loadDatabase(function(dbErr){
 				db.posts.insert(post, function(err, newPost){
@@ -50,11 +50,11 @@ router
 						res.json({success: false});
 						return;
 					}
-					
-					var postID = newPost._id,
-						host = req.headers.host,
-						postLink = host + '/posts/' + postID,
-						title = newPost.title;
+
+					var postID = newPost._id;
+					var host = req.headers.host;
+					var postLink = host + '/posts/' + postID;
+					var title = newPost.title;
 					publisher.emit('publish', postLink, title, host);
 					commonHelpers.uploadToS3Bucket('db/posts', 'posts');
 					res.status(200);
@@ -67,7 +67,7 @@ router
 			res.json({success: false});
 		}
 	});
-	
+
 router
 	.use(bodyParser.urlencoded({extended: false}))
 	.use(bodyParser.json())
@@ -84,7 +84,7 @@ router
 					res.end();
 					return;
 				}
-				
+
 				res.status(200);
 				res.json({post: post});
 			});
@@ -97,7 +97,7 @@ router
 					if(err){
 						res.json({removed: 0});
 					}
-					
+
 					commonHelpers.uploadToS3Bucket('db/posts', 'posts');
 					res.json({removed: removedAmount});
 				});
@@ -112,14 +112,14 @@ router
 		var updatedPost = req.body;
 		'$promise' in updatedPost && delete updatedPost.$promise;
 		'$resolved' in updatedPost && delete updatedPost.$resolved;
-		
+
 		if(req.session.userId){
 			db.posts.loadDatabase(function(errDB){
 				db.posts.update(req.dbQuery, {$set: updatedPost}, {}, function(err, updatedAmount){
 					if(err){
 						res.json({updated: 0});
 					}
-					
+
 					commonHelpers.uploadToS3Bucket('db/posts', 'posts');
 					res.json({updated: updatedAmount});
 				});
@@ -135,13 +135,13 @@ router
 	.use(bodyParser.json())
 	.route('/subscribe')
 	.post(function(req, res){
-		var body = req.body,
-			email,
-			subscribeToDB = new Promise(function(resolve, reject){
-				email = body.email;
-				publisher.emit('subscribe', email, resolve, reject);
-			});
-		
+		var body = req.body;
+		var email;
+		var subscribeToDB = new Promise(function (resolve, reject) {
+			email = body.email;
+			publisher.emit('subscribe', email, resolve, reject);
+		});
+
 		subscribeToDB.then(function(info){
 			res.status(200);
 			res.json(info);
@@ -151,12 +151,12 @@ router
 		});
 	})
 	.delete(function(req, res){
-		var email = req.query.email,
-			unsubscribeFromDB = new Promise(function(resolve, reject){
-				publisher.emit('unsubscribe', email, resolve, reject);
-			});
-		
-		unsubscribeFromDB.then(function(info){
+		var email = req.query.email;
+		var unsubscribeFromDB = new Promise(function (resolve, reject) {
+			publisher.emit('unsubscribe', email, resolve, reject);
+		});
+
+		unsubscribeFromDB.then(function (info) {
 			res.status(200);
 			res.json(info);
 		}, function(){
@@ -164,6 +164,5 @@ router
 			res.end();
 		});
 	});
-	
-	
+
 module.exports = router;

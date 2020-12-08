@@ -1,16 +1,17 @@
-var events = require('events'),
-	Datastore = require('nedb'),
-	nodemailer = require('nodemailer'),
-	ejs = require('ejs'),
-	commonHelpers = require('./commonHelpers');
+var events = require('events');
+var Datastore = require('nedb');
+var nodemailer = require('nodemailer');
+var ejs = require('ejs');
+var commonHelpers = require('./commonHelpers');
 
-var publisher = new events.EventEmitter(),
-	emailSettingsFile = new Datastore({
+var publisher = new events.EventEmitter();
+var emailSettingsFile = new Datastore({
 		filename: 'db/emailSettings',
 		autoload: false
-	}),
-	emailSettings,
-	transporter;
+	});
+var emailSettings;
+var transporter;
+
 publisher.subscribers = new Datastore({
 	filename: 'db/subscribers',
 	autoload: false
@@ -82,7 +83,7 @@ publisher.on('unsubscribe', function(email, resolve, reject){
 
 publisher.on('publish', function(link, title, host){
 	var pub = this;
-	
+
 	emailSettingsFile.loadDatabase(function(errDB){
 		emailSettingsFile.find({}, function(err, data){
 			if(!err && data && data.length){
@@ -96,15 +97,15 @@ publisher.on('publish', function(link, title, host){
 						pass: emailSettings.password
 					}
 				});
-				
+
 				if(emailSettings && link && title && host){
 					pub.subscribers.loadDatabase(function(errDB){
 						pub.subscribers.find({}, function(err, subscribers){
 							if(!err){
 								for(var subscriber of subscribers){
-									var currentEmail = subscriber.email,
-										unsubscribeLink = host + '/unsubscribe?email=' + currentEmail;
-									
+									var currentEmail = subscriber.email;
+									var unsubscribeLink = host + '/unsubscribe?email=' + currentEmail;
+
 									ejs.renderFile('./api/templates/notify/html.ejs', {link: link, title: title, unsubscribeLink: unsubscribeLink}, function(err, htmlContent){
 										if(!err){
 											var emailOptions = {
@@ -113,7 +114,7 @@ publisher.on('publish', function(link, title, host){
 												subject: 'Check out new the post from IR blog!',
 												html: htmlContent
 											};
-												
+
 											transporter.sendMail(emailOptions, function(err, info){
 												if(err){
 													console.log(err);

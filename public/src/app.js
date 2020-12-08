@@ -39,7 +39,7 @@ angular.module('IvankoRambo', ['ngRoute', 'ngResource', 'ngSanitize'])
 			.otherwise({
 				redirectTo: '/posts'
 			});
-		
+
 		$locationProvider.html5Mode(true);
 		$resourceProvider.defaults.stripTrailingSlashes = false;
 	})

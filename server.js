@@ -1,10 +1,10 @@
-var express = require('express'),
-	server = express(),
-	api = require('./api/rest'),
-	user = require('./api/user'),
-	fs = require('fs'),
-	AWS = require('aws-sdk'),
-	configAWS = require('./configSet/configAWS.json');
+var express = require('express');
+var server = express();
+var api = require('./api/rest');
+var user = require('./api/user');
+var fs = require('fs');
+var AWS = require('aws-sdk');
+//var configAWS = require('./configSet/configAWS.json');
 
 var expressApp = express();
 

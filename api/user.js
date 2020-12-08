@@ -1,9 +1,9 @@
-var express = require('express'),
-	bodyParser = require('body-parser'),
-	session = require('express-session'),
-	Datastore = require('nedb'),
-	db = {},
-	commonHelpers = require('./commonHelpers');
+var express = require('express');
+var bodyParser = require('body-parser');
+var session = require('express-session');
+var Datastore = require('nedb');
+var db = {};
+var commonHelpers = require('./commonHelpers');
 
 var router = express.Router();
 
