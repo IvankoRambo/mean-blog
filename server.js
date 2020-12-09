@@ -9,7 +9,20 @@ var expressApp = express();
 
 expressApp.set('view engine', 'ejs');
 
-server.use(express.static('./public'))
+server
+	.all(/.*/, function (req, res, next) {
+		var host = req.header('host');
+		var url = req.url;
+		var protocol = req.protocol;
+		var isWithWWW = host.match(/^www\..*/i);
+		if (isWithWWW && protocol === 'https') {
+			next();
+		} else {
+			var redirectStr = 'https://' + (!isWithWWW ? 'www.' : '') + host + url;
+			res.redirect(301, redirectStr);
+		}
+	})
+	.use(express.static('./public'))
 	.use('/api', user)
 	.use('/api', api)
 	.get('*', function(req, res){
