@@ -9,16 +9,18 @@ var expressApp = express();
 
 expressApp.set('view engine', 'ejs');
 
+server.enable('trust proxy');
+
 server
 	.all(/.*/, function (req, res, next) {
 		var host = req.header('host');
 		var url = req.url;
-		var protocol = req.protocol;
+		var protocol = req.header('x-forwarded-proto');
 		var isWithWWW = host.match(/^www\..*/i);
-		if (isWithWWW && protocol === 'https') {
+		if (isWithWWW && protocol) {
 			next();
 		} else {
-			var redirectStr = 'https://' + (!isWithWWW ? 'www.' : '') + host + url;
+			var redirectStr = 'http://' + (!isWithWWW ? 'www.' : '') + host + url;
 			res.redirect(301, redirectStr);
 		}
 	})
