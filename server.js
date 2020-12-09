@@ -17,10 +17,10 @@ server
 		var url = req.url;
 		var protocol = req.header('x-forwarded-proto');
 		var isWithWWW = host.match(/^www\..*/i);
-		if (isWithWWW && protocol) {
+		if (isWithWWW && protocol === 'https') {
 			next();
 		} else {
-			var redirectStr = 'http://' + (!isWithWWW ? 'www.' : '') + host + url;
+			var redirectStr = 'https://' + (!isWithWWW ? 'www.' : '') + host + url;
 			res.redirect(301, redirectStr);
 		}
 	})
