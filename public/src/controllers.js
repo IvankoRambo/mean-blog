@@ -116,7 +116,7 @@ angular.module('IvankoRambo')
 			img: 'static/backupimages/moneymap.png',
 			url: 'https://www.moneymap.one/',
 			title: 'Moneymap',
-			text: 'Web part of complex digital wallet application written on React.js for client side and Express.js-based back-end middleware to interact with core services.'
+			text: 'Web part of complex digital wallet application written on React.js for client side and on Express.js-based back-end middleware to interact with core services.'
 		}];
 	}])
 	.controller('NewPost', ['Posts', 'Users', '$rootScope', '$location',
