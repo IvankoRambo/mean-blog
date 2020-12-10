@@ -27,6 +27,9 @@ server
 	.use(express.static('./public'))
 	.use('/api', user)
 	.use('/api', api)
+	.get('/object-fly-simulator', function (req, res) {
+		res.sendFile(__dirname + '/public/static/projects/object-fly-simulator/src/main.html');
+	})
 	.get('*', function(req, res){
 		res.sendFile(__dirname + '/public/main.html');
 	})

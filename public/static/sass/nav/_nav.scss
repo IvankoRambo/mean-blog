@@ -4,7 +4,7 @@
 	@include mobile-tablet {
 		margin-bottom: 0;
 	}
-	
+
 	.container-fluid {
 		position: relative;
 
@@ -68,7 +68,7 @@
 				bottom: 0;
 				margin-bottom: 10px;
 			}
-			
+
 			a {
 				text-decoration: none;
 				position: relative;
@@ -76,7 +76,7 @@
 				padding-top: 7px;
 				font-size: 35px;
 				color: #000;
-				
+
 				&.github {
 					float: left;
 
@@ -96,7 +96,7 @@
 				}
 			}
 		}
-		
+
 		&--subscribe {
 
 			.navbar-nav {
@@ -127,7 +127,7 @@
 					padding-right: 30px;
 				}
 			}
-			
+
 			li {
 				padding-top: 15px;
 				padding-bottom: 15px;
@@ -135,7 +135,7 @@
 				text-align: center;
 				cursor: pointer;
 				background-color: #e5e2bd;
-				
+
 				&:hover {
 					background-color: #e7dfaf;
 
@@ -416,7 +416,7 @@
 					font-size: 16px;
 					line-height: 18px;
 				}
-			} 
+			}
 		}
 	}
 }
@@ -448,14 +448,14 @@
 	@include tablet-desktop {
 		height: 40%;
 	}
-	
+
 	&_close {
 		cursor: pointer;
 		text-align: right;
 		padding: 0 5px 10px 0;
 		font-size: 12px;
 	}
-	
+
 	&_submit {
 		& > p {
 			font: {
@@ -464,16 +464,16 @@
 			}
 			text-align: center;
 		}
-		
+
 		form {
 			.signature {
 				text-align: left;
 				margin-bottom: 5px;
 			}
-			
+
 			input {
 				display: inline-block;
-				
+
 				&[type="email"] {
 					border-radius: 5px;
 					height: 20px;
@@ -481,7 +481,7 @@
 					padding-bottom: 13px;
 					border: 1px solid #b0afaf;
 				}
-				
+
 				&[type="submit"] {
 					color: #234253;
 					background: transparent;
@@ -499,7 +499,7 @@
 			}
 		}
 	}
-	
+
 	&_status {
 		text-align: center;
 		font: {
@@ -510,12 +510,12 @@
 		margin-left: 10px;
 		margin-right: 10px;
 		border-bottom: 1px solid green;
-		
+
 		&.error {
 			border-bottom: 1px solid red;
 		}
 	}
-	
+
 	&:after {
 		position: fixed;
 		content: "";
@@ -526,7 +526,7 @@
 		background: rgba(0, 0, 0, 0.5);
 		z-index: -2;
 	}
-	
+
 	&:before {
 		position: absolute;
 		content: "";

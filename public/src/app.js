@@ -16,6 +16,11 @@ angular.module('IvankoRambo', ['ngRoute', 'ngResource', 'ngSanitize'])
 				templateUrl: 'views/about.html',
 				controllerAs: '$about'
 			})
+			.when('/projects', {
+				controller: 'ProjectsController',
+				templateUrl: 'views/projects.html',
+				controllerAs: '$projects'
+			})
 			.when('/login', {
 				controller: 'LoginController',
 				templateUrl: 'views/login.html',

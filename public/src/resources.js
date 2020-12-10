@@ -8,7 +8,7 @@ angular.module('IvankoRambo')
 	.factory('Users', function($http){
 		var postUrl = '/api/login',
 			getUrl = '/api/loginstatus';
-		
+
 		return {
 			get: function(){
 				return $http.get(getUrl);
@@ -25,7 +25,7 @@ angular.module('IvankoRambo')
 	})
 	.factory('Subscribes', function($http){
 		var subscribeUrl = '/api/subscribe';
-		
+
 		return {
 			set: function(data){
 				return $http({

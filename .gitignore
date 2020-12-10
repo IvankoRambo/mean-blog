@@ -5,5 +5,7 @@ db
 configSet
 public/static/sasstarget
 public/static/images
+public/static/backupimages
+public/static/projects
 .sass-cache
 .metadata

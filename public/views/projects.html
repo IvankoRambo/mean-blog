@@ -1,0 +1,22 @@
+<main id="main" class="main-projects">
+    <div id="container" class="site-content container">
+        <div class="grid-container" ng-if="$projects.projectList.length > 0">
+            <div class="grid-item" ng-repeat="project in $projects.projectList">
+                <a target="_blank" href="{{project.url}}" class="grid-item-link">
+                    <div class="grid-item-image">
+                        <figure class="grid-item-image-figure">
+                            <img src="{{project.img}}" class="grid-item-image-figure--img" />
+                            <figcaption class="grid-item-image-figure--caption">{{project.title}}</figcaption>
+                        </figure>
+                    </div>
+                    <div class="grid-item-description">
+                        <div class="grid-item-description--title">{{project.title}}</div>
+                        <div class="grid-item-description--text">
+                            <p>{{project.text}}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</main>

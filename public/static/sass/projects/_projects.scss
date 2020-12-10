@@ -1,0 +1,101 @@
+.main-projects {
+    .grid {
+        &-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 12vw);
+            grid-gap: 30px 40px;
+
+            @include mobile {
+                grid-template-columns: none;
+                grid-template-rows: none;
+                grid-auto-rows: 20vh;
+                grid-gap: 40px;
+                padding: {
+                    left: 15px;
+                    right: 15px;
+                }
+            }
+        }
+
+        &-item {
+            position: relative;
+
+            @include desktop {
+                &:hover {
+                    .grid-item-description {
+                        visibility: visible;
+                        transform: translateY(0);
+                        height: 80%;
+                    }
+                }
+            }
+
+            &-link {
+                text-decoration: none;
+                background: transparent;
+                color: #000;
+            }
+
+            &-image {
+                &-figure {
+                    &--img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+
+                    &--caption {
+                        width: 100%;
+                        text-align: center;
+                        position: absolute;
+                        left: 0;
+                        color: #000;
+                        bottom: 0;
+                        background: #e7e7e7;
+                        opacity: 0.8;
+                        padding-top: 12px;
+                        padding-bottom: 9px;
+                        font-family: "Open Sans, Arial, sans-serif";
+                        font-size: 17px;
+                        line-height: 20px;
+                        font-weight: 600;
+                    }
+                }
+            }
+
+            &-description {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                position: absolute;
+                bottom: -2px;
+                left: 0;
+                right: 0;
+                height: 0;
+                background: #e7e7e7;
+                opacity: 0.9;
+                visibility: hidden;
+                padding: 30px 20px;
+                transform: translateY(100%);
+                transition: transform .3s cubic-bezier(0, 0, .32, 1), height .3s cubic-bezier(0, 0, .32, 1), visibility .1s cubic-bezier(0, 0, .32, 1);
+                font-size: 14px;
+                line-height: 16px;
+                font-family: "Open Sans, Arial, sans-serif";
+                text-align: left;
+                white-space: normal;
+
+                &--title {
+                    text-align: center;
+                    font-size: 18px;
+                    line-height: 20px;
+                    font-weight: 300;
+                }
+
+                @include mobile {
+                    display: none;
+                }
+            }
+        }
+    }
+}
