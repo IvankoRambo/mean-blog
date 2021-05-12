@@ -15,7 +15,7 @@
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.4",
     "nedb": "^1.8.0",
-    "nodemailer": "^4.6.4",
+    "nodemailer": "^6.4.16",
     "nodemon": "^1.12.1"
   },
   "scripts": {
